@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ACE Team • Ôn thi Nhập môn lập trình (C++)</title>
+    <link rel="icon" href="data:," />
+    <script src="https://unpkg.com/vue@3.4.38/dist/vue.global.prod.js"></script>
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --card: #101620;
+        --muted: #93a1b3;
+        --text: #e8eef9;
+        --accent: #4da3ff;
+        --accent2: #5bd0b7;
+        --danger: #ff6b6b;
+        --success: #38d996;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          "Helvetica Neue", Arial;
+        background: linear-gradient(180deg, #0b0f14, #0a0d12 40%, #080b10);
+        color: var(--text);
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        background: rgba(8, 11, 16, 0.9);
+        border-bottom: 1px solid #1b2737;
+        backdrop-filter: blur(8px);
+      }
+      .brand {
+        font-weight: 700;
+      }
+      .nav a {
+        margin: 0 8px;
+        padding: 6px 10px;
+        border-radius: 8px;
+        color: var(--text);
+      }
+      .nav a.active,
+      .nav a:hover {
+        background: #132032;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 24px auto;
+        padding: 0 16px;
+        min-height: calc(100vh - 44px - 68px - 40px - 24px);
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 900px) {
+        .grid-3,
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+      .card {
+        background: var(--card);
+        padding: 16px;
+        border: 1px solid #1b2737;
+        border-radius: 14px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      }
+      .progress {
+        height: 8px;
+        background: #0f1a26;
+        border-radius: 6px;
+        overflow: hidden;
+        margin: 8px 0 4px;
+      }
+      .progress .bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        width: 0;
+      }
+      .btn {
+        background: #132032;
+        color: var(--text);
+        border: 1px solid #223147;
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: #17273a;
+      }
+      .btn.primary {
+        background: linear-gradient(90deg, #3b82f6, #22c1a5);
+        border: none;
+        color: white;
+      }
+      .btn.success {
+        background: linear-gradient(90deg, #16a34a, #22c55e);
+        border: none;
+        color: white;
+      }
+      .btn.danger {
+        background: linear-gradient(90deg, #ef4444, #f97316);
+        border: none;
+        color: white;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .actions.spaced {
+        justify-content: center;
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .center {
+        text-align: center;
+      }
+      .footer {
+        padding: 24px 16px;
+        text-align: center;
+        color: #90a3b8;
+        border-top: 1px solid #1b2737;
+        margin-top: 40px;
+      }
+
+      .chapters {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 16px;
+      }
+      .chapters-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .chap-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #1b2737;
+        background: #0f1824;
+        color: var(--text);
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .chap-item.done {
+        border-color: var(--accent2);
+        background: #0f1f1a;
+      }
+      .tick {
+        color: var(--accent2);
+        font-weight: 700;
+      }
+      .chapter-content .snippets summary {
+        cursor: pointer;
+      }
+      .qcard {
+        background: #0f1622;
+        border: 1px solid #1b2737;
+        border-radius: 10px;
+        padding: 12px;
+        margin: 10px 0;
+      }
+      .qtext {
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .qopts .opt {
+        display: block;
+        margin: 4px 0;
+      }
+      .short {
+        width: 100%;
+        padding: 8px;
+        border-radius: 8px;
+        border: 1px solid #223147;
+        background: #0a1018;
+        color: var(--text);
+      }
+      .score {
+        margin-left: 8px;
+      }
+      .quiz-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+      }
+      .quiz-meta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: 14px;
+        color: #9bb0c8;
+      }
+      .quiz-take {
+        margin-top: 16px;
+      }
+      .ans {
+        background: #0f141c;
+        border: 1px dashed #25344b;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 8px 0;
+      }
+      .passed {
+        color: var(--success);
+      }
+      .failed {
+        color: var(--danger);
+      }
+
+      .flash-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .flashcard {
+        perspective: 1000px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .flashcard-inner {
+        width: min(720px, 96vw);
+        min-height: 200px;
+        background: #0f1622;
+        border: 1px solid #1b2737;
+        border-radius: 14px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+      }
+      .flashcard-inner.flipped {
+        transform: rotateY(180deg);
+      }
+      .face {
+        position: absolute;
+        inset: 0;
+        padding: 18px;
+        backface-visibility: hidden;
+        border-radius: 14px;
+      }
+      .face.back {
+        transform: rotateY(180deg);
+      }
+      .face .topic {
+        font-size: 13px;
+        color: #9bb0c8;
+        margin-bottom: 4px;
+      }
+      .face .q {
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .face .a {
+        white-space: pre-wrap;
+      }
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .table th,
+      .table td {
+        border: 1px solid #1b2737;
+        padding: 6px 8px;
+        text-align: left;
+      }
+      .res {
+        line-height: 1.9;
+      }
+      select {
+        background: #0a1018;
+        color: var(--text);
+        border: 1px solid #223147;
+        border-radius: 8px;
+        padding: 6px 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <div class="brand"><strong>ACE Team</strong> • Ôn thi C++</div>
+        <nav class="nav">
+          <a :class="{active: view==='home'}" href="#/home">Tổng quan</a>
+          <a :class="{active: view==='chapters'}" href="#/chapters">Chương</a>
+          <a :class="{active: view==='quizzes'}" href="#/quizzes">Đề ôn tập</a>
+          <a :class="{active: view==='flashcards'}" href="#/flashcards"
+            >Flashcards</a
+          >
+          <a :class="{active: view==='resources'}" href="#/resources"
+            >Tài liệu</a
+          >
+           <a :class="{active: view==='results'}" href="#/results"
+             >Bảng tổng kết</a
+           >
+           <a :class="{active: view==='official'}" href="#/official"
+             >Đề thi UIT</a
+           >
+        </nav>
+      </header>
+
+      <main class="container">
+        <!-- HOME -->
+        <section v-if="view==='home'">
+          <h1>Ôn thi Nhập môn lập trình (C++)</h1>
+          <p>
+            Mỗi ngày 1 đề (~50 câu), ôn flashcards, đánh dấu chương đã học. Tiến
+            trình được lưu bằng <code>localStorage</code>.
+          </p>
+          <div class="grid-3">
+            <div class="card">
+              <h3>Tiến độ chương</h3>
+              <p>
+                {{ completedChaptersCount }}/{{ chapters.length }} chương đã
+                đánh dấu hoàn thành.
+              </p>
+              <div class="progress">
+                <div class="bar" :style="{width: chapterProgress+'%'}"></div>
+              </div>
+              <div class="muted">
+                Học xong lý thuyết và miniquiz ở mỗi chương rồi bấm “Đánh dấu đã
+                học”.
+              </div>
+            </div>
+            <div class="card">
+              <h3>Tiến độ đề ôn tập</h3>
+              <p>
+                {{ passedQuizzes }}/{{ quizzes.length }} đề đạt yêu cầu (≥ {{
+                passScore }}%).
+              </p>
+              <div class="progress">
+                <div class="bar" :style="{width: quizProgress+'%'}"></div>
+              </div>
+              <div class="muted">
+                Có thể làm lại đề <em>không giới hạn</em>. Hệ thống lưu điểm cao
+                nhất.
+              </div>
+            </div>
+            <div class="card">
+              <h3>Flashcards</h3>
+              <p>
+                {{ learnedFlashcardsCount }}/{{ flashcards.length }} thẻ đã ghi
+                nhớ.
+              </p>
+              <div class="progress">
+                <div class="bar" :style="{width: flashProgress+'%'}"></div>
+              </div>
+              <div class="muted">
+                Ôn hàng ngày theo phương pháp lặp lại ngắt quãng (spaced
+                repetition).
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a class="btn primary" href="#/quizzes">Bắt đầu làm đề hôm nay</a>
+            <a class="btn" href="#/flashcards">Ôn flashcards 10 phút</a>
+          </div>
+        </section>
+
+        <!-- CHAPTERS -->
+        <section v-if="view==='chapters'">
+          <h2>Ôn tập theo chương</h2>
+          <div class="chapters">
+            <aside class="chapters-list">
+              <button
+                v-for="(c,idx) in chapters"
+                :key="idx"
+                class="chap-item"
+                :class="{'done': isChapterDone(idx)}"
+                @click="openChapter(idx)"
+              >
+                <span>{{ idx+1 }}. {{ c.title }}</span>
+                <span v-if="isChapterDone(idx)" class="tick">✔</span>
+              </button>
+            </aside>
+            <article class="chapter-content" v-if="currentChapterIndex!==null">
+              <h3>{{ currentChapter.title }}</h3>
+              <p v-for="(p,i) in currentChapter.summary" :key="i">{{ p }}</p>
+              <details
+                v-if="currentChapter.snippets && currentChapter.snippets.length"
+                class="snippets"
+              >
+                <summary>Ví dụ minh họa</summary>
+                <pre
+                  v-for="(snip,i) in currentChapter.snippets"
+                  :key="i"
+                ><code>{{ snip }}</code></pre>
+              </details>
+              <div
+                class="mini-quiz"
+                v-if="currentChapter.quiz && currentChapter.quiz.length"
+              >
+                <h4>Mini Quiz</h4>
+                <div
+                  v-for="(q, qi) in currentChapter.quiz"
+                  :key="qi"
+                  class="qcard"
+                >
+                  <div class="qtext">{{ qi+1 }}. {{ q.text }}</div>
+                  <div class="qopts" v-if="q.type==='mcq'">
+                    <label v-for="(opt,oi) in q.options" :key="oi" class="opt">
+                      <input
+                        type="radio"
+                        :name="'c'+currentChapterIndex+'_q'+qi"
+                        :value="oi"
+                        v-model="miniAnswers[qi]"
+                      />
+                      {{ opt }}
+                    </label>
+                  </div>
+                  <div v-else-if="q.type==='short'">
+                    <input
+                      class="short"
+                      type="text"
+                      v-model="miniAnswers[qi]"
+                      placeholder="Nhập đáp án ngắn..."
+                    />
+                  </div>
+                </div>
+                <div class="actions">
+                  <button class="btn" @click="checkMiniQuiz">
+                    Chấm mini quiz
+                  </button>
+                  <span v-if="miniScore!==null" class="score"
+                    >Điểm: {{ miniScore }}/{{ currentChapter.quiz.length
+                    }}</span
+                  >
+                </div>
+              </div>
+              <div class="actions">
+                <button
+                  class="btn success"
+                  @click="markChapterDone(currentChapterIndex)"
+                >
+                  Đánh dấu đã học xong
+                </button>
+              </div>
+            </article>
+            <article class="chapter-placeholder" v-else>
+              <p>Chọn một chương ở bên trái để bắt đầu.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- QUIZZES -->
+        <section v-if="view==='quizzes'">
+          <h2>Đề ôn tập (10 đề • 50 câu/đề)</h2>
+
+          <!-- Luyện theo chủ đề: thêm, KHÔNG ảnh hưởng 10 đề mẫu -->
+          <div class="card">
+            <h3>Luyện theo chủ đề</h3>
+            <div class="actions">
+              <label
+                >Chủ đề:
+                <select v-model="selectedTopicKey">
+                  <option disabled value="">-- chọn --</option>
+                  <option
+                    v-for="(label,key) in topicLabels"
+                    :key="key"
+                    :value="key"
+                  >
+                    {{ label }}
+                  </option>
+                </select>
+              </label>
+              <button
+                class="btn"
+                @click="startTopicQuiz"
+                :disabled="!selectedTopicKey"
+              >
+                Làm đề (20 câu)
+              </button>
+              <span class="muted"
+                >Đề theo chủ đề không lưu vào bảng tổng kết.</span
+              >
+            </div>
+          </div>
+
+          <div class="quiz-list">
+            <div v-for="(t, ti) in quizzes" :key="ti" class="card quiz-item">
+              <h3>Đề {{ ti+1 }}</h3>
+              <p class="muted">{{ t.description }}</p>
+              <div class="quiz-meta">
+                <span
+                  >Điểm cao nhất:
+                  <strong>{{ bestScore(ti) ?? '-' }}</strong>%</span
+                >
+                <span>Lần làm: <strong>{{ attempts(ti) }}</strong></span>
+                <span
+                  >Trạng thái:
+                  <strong
+                    :class="{'passed': isPassed(ti), 'failed': !isPassed(ti)}"
+                  >
+                    {{ isPassed(ti) ? 'Đã đạt' : 'Chưa đạt' }}
+                  </strong>
+                </span>
+              </div>
+              <div class="actions">
+                <button class="btn primary" @click="startQuiz(ti)">
+                  Làm đề
+                </button>
+                <button class="btn" @click="resetQuiz(ti)">
+                  Xóa kết quả đề này
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div v-if="takingQuizIndex!==null || topicMode" class="quiz-take">
+            <hr />
+            <h3 v-if="!topicMode">Đề {{ takingQuizIndex+1 }}</h3>
+            <h3 v-else>Đề theo chủ đề: {{ topicLabels[selectedTopicKey] }}</h3>
+            <div
+              v-for="(q, qi) in currentQuizQuestions"
+              :key="qi"
+              class="qcard"
+            >
+              <div class="qtext">{{ qi+1 }}. {{ q.text }}</div>
+              <template v-if="q.type==='mcq'">
+                <div class="qopts">
+                  <label v-for="(opt,oi) in q.options" :key="oi" class="opt">
+                    <input
+                      type="radio"
+                      :name="'q_'+qi"
+                      :value="oi"
+                      v-model="quizAnswers[qi]"
+                    />
+                    {{ opt }}
+                  </label>
+                </div>
+              </template>
+              <template v-else-if="q.type==='code-out'">
+                <pre><code>{{ q.code }}</code></pre>
+                <div class="muted">Dự đoán output:</div>
+                <input
+                  class="short"
+                  type="text"
+                  v-model="quizAnswers[qi]"
+                  placeholder="Nhập output..."
+                />
+              </template>
+              <template v-else-if="q.type==='short'">
+                <input
+                  class="short"
+                  type="text"
+                  v-model="quizAnswers[qi]"
+                  placeholder="Nhập đáp án ngắn..."
+                />
+              </template>
+            </div>
+            <div class="actions">
+              <button class="btn primary" @click="submitQuiz">Nộp bài</button>
+              <button class="btn" @click="cancelQuiz">Hủy</button>
+            </div>
+
+            <div v-if="quizScore!==null" class="result">
+              <h4>Kết quả: {{ quizScore }}%</h4>
+              <p class="muted">
+                Đáp án đúng sẽ hiển thị bên dưới. Bạn có thể làm lại đề để cải
+                thiện điểm.
+              </p>
+              <div
+                v-for="(q, qi) in currentQuizQuestions"
+                :key="'a'+qi"
+                class="ans"
+              >
+                <div class="qtext">Câu {{ qi+1 }}: {{ q.text }}</div>
+                <div v-if="q.type==='mcq'">
+                  Đáp án đúng: <strong>{{ q.options[q.answer] }}</strong>
+                </div>
+                <div v-else>Đáp án đúng: <code>{{ q.answer }}</code></div>
+              </div>
+              <div class="actions">
+                <button class="btn success" @click="redoQuiz">
+                  Làm lại đề (xáo trộn)
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FLASHCARDS -->
+        <section v-if="view==='flashcards'">
+          <h2>Flashcards</h2>
+          <div class="flash-controls">
+            <label
+              ><input type="checkbox" v-model="hideLearned" /> Ẩn thẻ đã
+              nhớ</label
+            >
+            <button class="btn" @click="resetFlashcards">Reset đã nhớ</button>
+          </div>
+          <div class="flashcard" v-if="filteredFlashcards.length">
+            <div
+              class="flashcard-inner"
+              :class="{flipped: showAnswer}"
+              @click="toggleFlash"
+            >
+              <div class="face front">
+                <div class="topic">{{ currentFlash.topic }}</div>
+                <div class="q">{{ currentFlash.question }}</div>
+                <div class="hint muted">Nhấn để xem đáp án</div>
+              </div>
+              <div class="face back">
+                <div class="topic">{{ currentFlash.topic }}</div>
+                <div class="a" v-html="currentFlash.answer"></div>
+              </div>
+            </div>
+            <div class="actions spaced">
+              <button class="btn" @click="prevFlash">&larr; Trước</button>
+              <button class="btn success" @click="markFlashLearned">
+                Đã nhớ
+              </button>
+              <button class="btn" @click="nextFlash">Sau &rarr;</button>
+            </div>
+            <div class="muted center">
+              {{ flashIndex+1 }}/{{ filteredFlashcards.length }}
+            </div>
+          </div>
+          <p v-else class="muted">
+            Không còn thẻ để ôn (đã ẩn thẻ đã nhớ). Hãy bỏ chọn "Ẩn thẻ đã nhớ"
+            hoặc reset.
+          </p>
+        </section>
+
+        <!-- RESOURCES -->
+        <section v-if="view==='resources'">
+          <h2>Tài liệu ôn tập</h2>
+          <p>
+            Đặt link tài liệu (slide, đề cương, đề mẫu, đáp án...) tại đây. (Tạm
+            thời là mẫu; bạn có thể chỉnh trong <code>app.js</code> &rarr;
+            <code>resources</code>.)
+          </p>
+          <ul class="res">
+            <li v-for="(r,ri) in resources" :key="ri">
+              <a :href="r.url" target="_blank" rel="noopener">{{ r.title }}</a>
+              <span class="muted">— {{ r.note }}</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- RESULTS -->
+        <section v-if="view==='results'">
+          <h2>Bảng tổng kết</h2>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Chương</h3>
+              <ul>
+                <li v-for="(c,idx) in chapters" :key="idx">
+                  {{ idx+1 }}. {{ c.title }}
+                  <strong :class="{'passed': isChapterDone(idx)}"
+                    >{{ isChapterDone(idx) ? 'Đã hoàn thành' : 'Chưa' }}</strong
+                  >
+                </li>
+              </ul>
+              <button class="btn" @click="clearChapters">
+                Xóa đánh dấu chương
+              </button>
+            </div>
+            <div class="card">
+              <h3>Đề ôn tập</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Đề</th>
+                    <th>Điểm cao nhất</th>
+                    <th>Lần làm</th>
+                    <th>Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(t,ti) in quizzes" :key="ti">
+                    <td>Đề {{ ti+1 }}</td>
+                    <td>{{ bestScore(ti) ?? '-' }}%</td>
+                    <td>{{ attempts(ti) }}</td>
+                    <td>
+                      <strong
+                        :class="{'passed': isPassed(ti), 'failed': !isPassed(ti)}"
+                        >{{ isPassed(ti) ? 'Đã đạt' : 'Chưa đạt' }}</strong
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="actions">
+                <button class="btn" @click="clearQuizResults">
+                  Xóa tất cả kết quả
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Tiến trình & Sao lưu</h3>
+            <div class="actions">
+              <button class="btn" @click="exportProgress">
+                Xuất tiến trình (.json)
+              </button>
+              <label class="btn">
+                Nhập tiến trình
+                <input
+                  type="file"
+                  accept="application/json"
+                  style="display: none"
+                  @change="importProgress"
+                />
+              </label>
+              <button class="btn danger" @click="fullReset">
+                Reset toàn bộ
+              </button>
+            </div>
+            <p class="muted">
+              Tiến trình được lưu cục bộ bằng <code>localStorage</code> trên
+              thiết bị của bạn.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>© ACE Team — IT001 • Nhập môn lập trình (C++)</span>
+        <span>Build: Vue (CDN) • GitHub Pages ready</span>
+      </footer>
+    </div>
+
+    <!-- <script>
+      const PASS_SCORE = 80;
+      const STORAGE_KEY = "ace_cpp_progress_v1";
+      const TOPIC_LABELS = {
+        basics: "Cơ bản & Cú pháp",
+        control: "Rẽ nhánh & Vòng lặp",
+        array1d: "Mảng 1 chiều",
+        array2d: "Mảng 2 chiều",
+        strings: "Chuỗi C-style",
+        pointers: "Con trỏ",
+        functions: "Hàm & tham chiếu",
+        recursion: "Đệ quy",
+        structs: "Struct",
+      };
+
+      // Include all data and logic from app.js here (will be done in next steps)
+    </script> -->
+    <script src="./app.js"></script>
+  </body>
+</html>

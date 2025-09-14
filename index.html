@@ -213,6 +213,7 @@
         margin-left: 8px;
       }
       .quiz-list {
+        margin-top: 16px;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 16px;
@@ -288,6 +289,24 @@
       }
       .face .a {
         white-space: pre-wrap;
+      }
+      .face .options {
+        margin: 16px 0;
+        text-align: left;
+      }
+      .face .option {
+        padding: 8px 12px;
+        margin: 4px 0;
+        border-radius: 6px;
+        background: #1a1a1a;
+        border: 1px solid #333;
+        font-size: 16px;
+      }
+      .face .option.correct {
+        background: #0d4f1c;
+        border-color: var(--success);
+        color: var(--success);
+        font-weight: 500;
       }
       .table {
         width: 100%;
@@ -693,12 +712,24 @@
             >
               <div class="face front">
                 <div class="topic">{{ currentFlash.topic }}</div>
-                <div class="q">{{ currentFlash.question }}</div>
+                <div class="q">{{ currentFlash.text || currentFlash.question }}</div>
+                <div v-if="currentFlash.options" class="options">
+                  <div v-for="(option, i) in currentFlash.options" :key="i" class="option">
+                    {{ String.fromCharCode(65 + i) }}. {{ option }}
+                  </div>
+                </div>
                 <div class="hint muted">Nhấn để xem đáp án</div>
               </div>
               <div class="face back">
                 <div class="topic">{{ currentFlash.topic }}</div>
-                <div class="a" v-html="currentFlash.answer"></div>
+                <div class="q">{{ currentFlash.text || currentFlash.question }}</div>
+                <div v-if="currentFlash.options" class="options">
+                  <div v-for="(option, i) in currentFlash.options" :key="i" 
+                       :class="['option', i === currentFlash.answer ? 'correct' : '']">
+                    {{ String.fromCharCode(65 + i) }}. {{ option }}
+                  </div>
+                </div>
+                <div v-else class="a" v-html="currentFlash.answer"></div>
               </div>
             </div>
             <div class="actions spaced">

@@ -69,7 +69,12 @@ int main(){
       {
         type: "mcq",
         text: "using namespace std; có tác dụng gì?",
-        options: ["Khai báo biến", "Không cần std::", "Định nghĩa hàm", "Kết thúc chương trình"],
+        options: [
+          "Khai báo biến",
+          "Không cần std::",
+          "Định nghĩa hàm",
+          "Kết thúc chương trình",
+        ],
         answer: 1,
       },
       {
@@ -99,7 +104,12 @@ int main(){
       {
         type: "mcq",
         text: "Quá trình từ code sang file thực thi?",
-        options: ["Biên dịch -> Liên kết", "Thông dịch", "Chạy trực tiếp", "Upload"],
+        options: [
+          "Biên dịch -> Liên kết",
+          "Thông dịch",
+          "Chạy trực tiếp",
+          "Upload",
+        ],
         answer: 0,
       },
       {
@@ -115,7 +125,12 @@ int main(){
       {
         type: "mcq",
         text: "#include có tác dụng?",
-        options: ["Định nghĩa hàm", "Chèn nội dung file khác", "Khai báo biến", "Kết thúc chương trình"],
+        options: [
+          "Định nghĩa hàm",
+          "Chèn nội dung file khác",
+          "Khai báo biến",
+          "Kết thúc chương trình",
+        ],
         answer: 1,
       },
     ],
@@ -200,7 +215,12 @@ double c = (double)a / b; // 2.5`,
       {
         type: "mcq",
         text: "Ép kiểu từ int sang double dùng?",
-        options: ["(double)x", "double(x)", "static_cast<double>(x)", "Tất cả đều đúng"],
+        options: [
+          "(double)x",
+          "double(x)",
+          "static_cast<double>(x)",
+          "Tất cả đều đúng",
+        ],
         answer: 3,
       },
       {
@@ -666,7 +686,9 @@ std::cout << s;`,
     array2d.push(
       qCO(
         "Tổng tất cả phần tử ma trận a?",
-        `int a[${r}][${c}] = {${M.map((row) => `{${row.join(", ")}}`).join(", ")}}; 
+        `int a[${r}][${c}] = {${M.map((row) => `{${row.join(", ")}}`).join(
+          ", "
+        )}}; 
 int s = 0; 
 for(int i=0; i<${r}; i++)
 {
@@ -684,7 +706,9 @@ std::cout << s;`,
         array2d.push(
           qCO(
             "Giá trị a[i][j]?",
-            `int a[${r}][${c}] = {${M.map((row) => `{${row.join(", ")}}`).join(", ")}}; 
+            `int a[${r}][${c}] = {${M.map((row) => `{${row.join(", ")}}`).join(
+              ", "
+            )}}; 
 std::cout << a[${i}][${j}];`,
             M[i][j]
           )
@@ -1202,6 +1226,9 @@ const app = Vue.createApp({
       flashIndex: 0,
       showAnswer: false,
       hideLearned: false,
+
+      // UIT exam generator
+      uitExam: null,
     };
   },
   computed: {
@@ -1261,6 +1288,7 @@ const app = Vue.createApp({
         "flashcards",
         "resources",
         "results",
+        "official",
       ];
       this.view = allowed.includes(v) ? v : "home";
     },
@@ -1493,6 +1521,72 @@ const app = Vue.createApp({
         localStorage.removeItem(STORAGE_KEY);
         location.reload();
       }
+    },
+
+    // UIT Exam Generator
+    generateUitExam() {
+      const uitProblems = [
+        {
+          description:
+            "Cho 2 rổ táo, rổ thứ nhất có số quả táo, rổ thứ 2 có số quả táo. Hỏi cả hai rổ có bao nhiêu quả táo là chưa đủ 5 quả táo gấp đôi số quả táo nhiều gấp đôi số táo trong rổ thứ nhất. Hãy xác định số quả táo trong mỗi rổ.",
+          algorithmPoints: 0.5,
+          codePoints: 1,
+          level: "basic",
+        },
+        {
+          description:
+            "Cho 2 thùng đựng nước, thùng 1 đựng 20 lít nước, thùng 2 đựng gấp 5 lần số nước trong thùng 1. Hỏi cả hai thùng có bao nhiêu lít nước? Nếu ca nước ít hơn 5 thùng và ít nhất là bao nhiều thùng để bao phủ tất cả khối lượng nước trong 1 thùng hoặc nhiều hơn các thùng đó.",
+          algorithmPoints: 0.5,
+          codePoints: 1,
+          level: "medium",
+        },
+        {
+          description:
+            "Có 2 thùng đựng bình chờ các loại được tận dụng để tháo ra kênh rõ thanh toán loại trong mỗi thùng. Câu hoạch được hiển thị là thuộc tính sẽ được trở lại sau khi thu hoạch là bao nhiêu thùng thêm thuộc tính các loại loại thuộc tính cần hoạch đến tham gia số thùng được thêm vào.",
+          algorithmPoints: 1,
+          codePoints: 1.5,
+          level: "advanced",
+        },
+      ];
+
+      // Chọn ngẫu nhiên 2-3 bài toán với mức độ khác nhau
+      const selectedProblems = [
+        {
+          description:
+            "Cho 2 rổ táo, rổ thứ nhất có a quả táo, rổ thứ hai có b quả táo. Hỏi cả hai rổ có tổng cộng bao nhiêu quả táo? Nếu rổ thứ hai có số quả gấp đôi rổ thứ nhất thì rổ thứ hai có bao nhiêu quả?",
+          algorithmPoints: 0.5,
+          codePoints: 1,
+        },
+        {
+          description:
+            "Cho mảng số nguyên A có n phần tử. Tìm phần tử lớn nhất và nhỏ nhất trong mảng. Tính tổng các phần tử chẵn trong mảng.",
+          algorithmPoints: 0.75,
+          codePoints: 1.25,
+        },
+      ];
+
+      this.uitExam = {
+        header: {
+          university: "TRƯỜNG ĐH CÔNG NGHỆ THÔNG TIN",
+          center: "TRUNG TÂM PHÁT TRIỂN CNTT",
+          examTitle: "ĐỀ THI CUỐI HỌC KỲ II (2024-2025)",
+          subject: "MÔN: Nhập môn lập trình",
+          courseCode: "IT001.E21.CN2.TTNT",
+          duration: "Thời gian: 90 phút",
+        },
+        questions: [
+          {
+            points: 1.5,
+            clo: "CLO1, CLO4",
+            title: "Cho các bài toán sau:",
+            problems: selectedProblems,
+          },
+        ],
+      };
+    },
+
+    printUitExam() {
+      window.print();
     },
   },
   mounted() {

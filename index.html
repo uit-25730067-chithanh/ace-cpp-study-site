@@ -157,6 +157,11 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
+        position: sticky;
+        top: 80px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        padding-right: 8px;
       }
       .chap-item {
         display: flex;
@@ -168,6 +173,7 @@
         color: var(--text);
         border-radius: 10px;
         cursor: pointer;
+        text-align: left;
       }
       .chap-item.done {
         border-color: var(--accent2);
@@ -303,6 +309,66 @@
         border-radius: 8px;
         padding: 6px 8px;
       }
+
+      /* UIT Exam Styles */
+      .uit-exam-preview {
+        background: white;
+        color: black;
+        padding: 40px;
+        margin: 20px 0;
+        border-radius: 8px;
+        font-family: "Times New Roman", serif;
+        line-height: 1.5;
+      }
+      .exam-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #000;
+        padding-bottom: 20px;
+      }
+      .exam-info {
+        text-align: center;
+        flex: 1;
+      }
+      .can-bo-coi-thi {
+        text-align: right;
+        min-width: 300px;
+      }
+      .question-block {
+        margin: 30px 0;
+        page-break-inside: avoid;
+      }
+      .problem {
+        margin: 20px 0;
+        padding-left: 20px;
+      }
+      .requirements ol {
+        margin: 10px 0;
+      }
+      .answer-space {
+        margin: 15px 0;
+      }
+      .answer-area {
+        border: 1px solid #666;
+        min-height: 150px;
+        padding: 10px;
+        background: #fafafa;
+      }
+
+      @media print {
+        .uit-exam-preview {
+          background: white !important;
+          color: black !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+        .topbar,
+        .footer,
+        .actions {
+          display: none !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -319,12 +385,12 @@
           <a :class="{active: view==='resources'}" href="#/resources"
             >Tài liệu</a
           >
-           <a :class="{active: view==='results'}" href="#/results"
-             >Bảng tổng kết</a
-           >
-           <a :class="{active: view==='official'}" href="#/official"
-             >Đề thi UIT</a
-           >
+          <a :class="{active: view==='results'}" href="#/results"
+            >Bảng tổng kết</a
+          >
+          <a :class="{active: view==='official'}" href="#/official"
+            >Đề thi UIT</a
+          >
         </nav>
       </header>
 
@@ -741,6 +807,115 @@
               Tiến trình được lưu cục bộ bằng <code>localStorage</code> trên
               thiết bị của bạn.
             </p>
+          </div>
+        </section>
+
+        <!-- OFFICIAL UIT EXAM -->
+        <section v-if="view==='official'">
+          <h2>Đề thi chuẩn UIT Format</h2>
+          <div class="card">
+            <h3>Tạo đề thi theo format chính thức UIT</h3>
+            <p class="muted">
+              Sinh đề thi tự luận theo cấu trúc đề thi cuối kỳ của Trường ĐH
+              Công nghệ Thông tin với các bài toán lập trình hoàn chỉnh.
+            </p>
+            <div class="actions">
+              <button class="btn primary" @click="generateUitExam">
+                Sinh đề thi UIT (PDF-ready)
+              </button>
+              <button class="btn" @click="printUitExam" v-if="uitExam">
+                In/Xuất PDF
+              </button>
+            </div>
+          </div>
+
+          <div v-if="uitExam" class="uit-exam-preview">
+            <div class="exam-header">
+              <div class="exam-info">
+                <strong>TRƯỜNG ĐH CÔNG NGHỆ THÔNG TIN</strong><br />
+                <strong>TRUNG TÂM PHÁT TRIỂN CNTT</strong><br /><br />
+                <strong>ĐỀ THI CUỐI HỌC KỲ II (2024-2025)</strong><br />
+                <strong>MÔN: Nhập môn lập trình</strong><br />
+                <strong>IT001.E21.CN2.TTNT</strong><br />
+                <em>Thời gian: 90 phút</em>
+              </div>
+              <div class="can-bo-coi-thi">
+                <strong>CAN BỘ COI THI</strong><br />
+                <table style="border: 1px solid #666; width: 100%">
+                  <tr>
+                    <td style="padding: 8px; border: 1px solid #666">
+                      HỌ VÀ TÊN SV:
+                    </td>
+                    <td
+                      style="padding: 8px; border: 1px solid #666; width: 60%"
+                    ></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px; border: 1px solid #666">MSSV:</td>
+                    <td style="padding: 8px; border: 1px solid #666"></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px; border: 1px solid #666">LỚP:</td>
+                    <td style="padding: 8px; border: 1px solid #666"></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px; border: 1px solid #666">
+                      SỐ BÁO DANH:
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #666"></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="exam-content">
+              <div
+                v-for="(question, qi) in uitExam.questions"
+                :key="qi"
+                class="question-block"
+              >
+                <h3>
+                  Câu {{ qi + 1 }} ({{ question.points }} điểm) ({{ question.clo
+                  }})
+                </h3>
+                <p><strong>{{ question.title }}</strong></p>
+
+                <div
+                  v-for="(problem, pi) in question.problems"
+                  :key="pi"
+                  class="problem"
+                >
+                  <h4>Bài toán {{ pi + 1 }}:</h4>
+                  <p>{{ problem.description }}</p>
+
+                  <div class="requirements">
+                    <p><strong>Yêu cầu:</strong></p>
+                    <ol>
+                      <li>
+                        Viết thuật toán (sơ đồ khối hoặc mã giả) giải bài toán
+                        trên ({{ problem.algorithmPoints }} điểm)
+                      </li>
+                      <li>
+                        Viết chương trình hoàn chỉnh bằng ngôn ngữ C++ để giải
+                        bài toán ({{ problem.codePoints }} điểm)
+                      </li>
+                    </ol>
+                  </div>
+
+                  <div class="answer-space">
+                    <p><strong>Lời giải:</strong></p>
+                    <div
+                      class="answer-area"
+                      style="
+                        min-height: 200px;
+                        border: 1px solid #ccc;
+                        margin: 10px 0;
+                      "
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>

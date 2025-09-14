@@ -257,7 +257,7 @@
       }
       .flashcard-inner {
         width: min(720px, 96vw);
-        min-height: 200px;
+        min-height: 286px;
         background: #0f1622;
         border: 1px solid #1b2737;
         border-radius: 14px;
@@ -712,9 +712,15 @@
             >
               <div class="face front">
                 <div class="topic">{{ currentFlash.topic }}</div>
-                <div class="q">{{ currentFlash.text || currentFlash.question }}</div>
+                <div class="q">
+                  {{ currentFlash.text || currentFlash.question }}
+                </div>
                 <div v-if="currentFlash.options" class="options">
-                  <div v-for="(option, i) in currentFlash.options" :key="i" class="option">
+                  <div
+                    v-for="(option, i) in currentFlash.options"
+                    :key="i"
+                    class="option"
+                  >
                     {{ String.fromCharCode(65 + i) }}. {{ option }}
                   </div>
                 </div>
@@ -722,10 +728,15 @@
               </div>
               <div class="face back">
                 <div class="topic">{{ currentFlash.topic }}</div>
-                <div class="q">{{ currentFlash.text || currentFlash.question }}</div>
+                <div class="q">
+                  {{ currentFlash.text || currentFlash.question }}
+                </div>
                 <div v-if="currentFlash.options" class="options">
-                  <div v-for="(option, i) in currentFlash.options" :key="i" 
-                       :class="['option', i === currentFlash.answer ? 'correct' : '']">
+                  <div
+                    v-for="(option, i) in currentFlash.options"
+                    :key="i"
+                    :class="['option', i === currentFlash.answer ? 'correct' : '']"
+                  >
                     {{ String.fromCharCode(65 + i) }}. {{ option }}
                   </div>
                 </div>

@@ -1928,176 +1928,1007 @@ function buildTenTests() {
 // ====== FLASHCARDS (40 MCQ mỗi chủ đề) ======
 const flashcards = (function () {
   const cards = [];
-  const add = (topic, text, options, answer) => cards.push({ topic, text, options, answer });
+  const add = (topic, text, options, answer) =>
+    cards.push({ topic, text, options, answer });
   // 1. Cú pháp C++ (40 câu)
-  add("Cú pháp", "Hàm main() có vai trò gì?", ["Điểm bắt đầu chương trình", "Kết thúc chương trình", "Khai báo biến", "In ra màn hình"], 0);
+  add(
+    "Cú pháp",
+    "Hàm main() có vai trò gì?",
+    [
+      "Điểm bắt đầu chương trình",
+      "Kết thúc chương trình",
+      "Khai báo biến",
+      "In ra màn hình",
+    ],
+    0
+  );
   add("Cú pháp", "Ký tự nào kết thúc câu lệnh C++?", [",", ".", ";", ":"], 2);
-  add("Cú pháp", "Comment một dòng trong C++ dùng?", ["/* */", "//", "#", "--"], 1);
-  add("Cú pháp", "Comment nhiều dòng trong C++ dùng?", ["//", "/* */", "<!-- -->", "# #"], 1);
-  add("Cú pháp", "Từ khóa nào khai báo hằng số?", ["var", "const", "final", "static"], 1);
-  add("Cú pháp", "Tên biến C++ có thể bắt đầu bằng?", ["Số", "Chữ cái hoặc _", "Ký tự đặc biệt", "Khoảng trắng"], 1);
-  add("Cú pháp", "#include có tác dụng gì?", ["Khai báo hàm", "Chèn nội dung file khác", "Tạo biến", "Kết thúc chương trình"], 1);
-  add("Cú pháp", "namespace std có tác dụng gì?", ["Tạo biến", "Sử dụng cout/cin mà không cần std::", "Kết thúc chương trình", "Khai báo mảng"], 1);
-  add("Cú pháp", "Kiểu dữ liệu nào lưu số nguyên?", ["float", "int", "char", "string"], 1);
-  add("Cú pháp", "Kiểu dữ liệu nào lưu số thực?", ["int", "char", "float", "bool"], 2);
-  add("Cú pháp", "Kiểu dữ liệu nào lưu ký tự?", ["int", "float", "char", "string"], 2);
-  add("Cú pháp", "Kiểu dữ liệu bool có thể nhận giá trị nào?", ["0 và 1", "true và false", "Cả hai", "Chỉ số nguyên"], 2);
-  add("Cú pháp", "Kích thước int thường là bao nhiêu byte?", ["2", "4", "8", "1"], 1);
+  add(
+    "Cú pháp",
+    "Comment một dòng trong C++ dùng?",
+    ["/* */", "//", "#", "--"],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Comment nhiều dòng trong C++ dùng?",
+    ["//", "/* */", "<!-- -->", "# #"],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Từ khóa nào khai báo hằng số?",
+    ["var", "const", "final", "static"],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Tên biến C++ có thể bắt đầu bằng?",
+    ["Số", "Chữ cái hoặc _", "Ký tự đặc biệt", "Khoảng trắng"],
+    1
+  );
+  add(
+    "Cú pháp",
+    "#include có tác dụng gì?",
+    [
+      "Khai báo hàm",
+      "Chèn nội dung file khác",
+      "Tạo biến",
+      "Kết thúc chương trình",
+    ],
+    1
+  );
+  add(
+    "Cú pháp",
+    "namespace std có tác dụng gì?",
+    [
+      "Tạo biến",
+      "Sử dụng cout/cin mà không cần std::",
+      "Kết thúc chương trình",
+      "Khai báo mảng",
+    ],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Kiểu dữ liệu nào lưu số nguyên?",
+    ["float", "int", "char", "string"],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Kiểu dữ liệu nào lưu số thực?",
+    ["int", "char", "float", "bool"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "Kiểu dữ liệu nào lưu ký tự?",
+    ["int", "float", "char", "string"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "Kiểu dữ liệu bool có thể nhận giá trị nào?",
+    ["0 và 1", "true và false", "Cả hai", "Chỉ số nguyên"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "Kích thước int thường là bao nhiêu byte?",
+    ["2", "4", "8", "1"],
+    1
+  );
   add("Cú pháp", "Kích thước char là bao nhiêu byte?", ["1", "2", "4", "8"], 0);
-  add("Cú pháp", "Giá trị mặc định của biến int chưa khởi tạo?", ["0", "1", "Giá trị rác", "-1"], 2);
-  add("Cú pháp", "Cách khai báo biến đúng?", ["int x;", "x int;", "integer x;", "var x;"], 0);
-  add("Cú pháp", "Cách khởi tạo biến đúng?", ["int x = 5;", "int x := 5;", "x = 5 int;", "5 = int x;"], 0);
-  add("Cú pháp", "Ký tự escape \\n có nghĩa gì?", ["Tab", "Xuống dòng", "Khoảng trắng", "Backslash"], 1);
-  add("Cú pháp", "Ký tự escape \\t có nghĩa gì?", ["Tab", "Xuống dòng", "Null", "Backslash"], 0);
-  add("Cú pháp", "Từ khóa nào thoát khỏi chương trình?", ["exit", "return", "break", "continue"], 0);
-  add("Cú pháp", "Thứ tự ưu tiên toán tử * và + như thế nào?", ["+ cao hơn *", "* cao hơn +", "Bằng nhau", "Tùy thuộc vào context"], 1);
-  add("Cú pháp", "Biến toàn cục được khai báo ở đâu?", ["Trong hàm main", "Ngoài tất cả hàm", "Trong header file", "Không thể khai báo"], 1);
-  add("Cú pháp", "Biến cục bộ có phạm vi như thế nào?", ["Toàn chương trình", "Chỉ trong hàm", "Chỉ trong file", "Không có phạm vi"], 1);
-  add("Cú pháp", "Từ khóa nào định nghĩa hằng số?", ["#define", "const", "Cả hai", "Không có"], 2);
-  add("Cú pháp", "Cách viết hằng số đúng?", ["const int MAX = 100;", "int const = 100;", "MAX const int = 100;", "Tất cả đều sai"], 0);
-  add("Cú pháp", "Compiler C++ phổ biến là gì?", ["gcc/g++", "javac", "python", "node"], 0);
+  add(
+    "Cú pháp",
+    "Giá trị mặc định của biến int chưa khởi tạo?",
+    ["0", "1", "Giá trị rác", "-1"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "Cách khai báo biến đúng?",
+    ["int x;", "x int;", "integer x;", "var x;"],
+    0
+  );
+  add(
+    "Cú pháp",
+    "Cách khởi tạo biến đúng?",
+    ["int x = 5;", "int x := 5;", "x = 5 int;", "5 = int x;"],
+    0
+  );
+  add(
+    "Cú pháp",
+    "Ký tự escape \\n có nghĩa gì?",
+    ["Tab", "Xuống dòng", "Khoảng trắng", "Backslash"],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Ký tự escape \\t có nghĩa gì?",
+    ["Tab", "Xuống dòng", "Null", "Backslash"],
+    0
+  );
+  add(
+    "Cú pháp",
+    "Từ khóa nào thoát khỏi chương trình?",
+    ["exit", "return", "break", "continue"],
+    0
+  );
+  add(
+    "Cú pháp",
+    "Thứ tự ưu tiên toán tử * và + như thế nào?",
+    ["+ cao hơn *", "* cao hơn +", "Bằng nhau", "Tùy thuộc vào context"],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Biến toàn cục được khai báo ở đâu?",
+    [
+      "Trong hàm main",
+      "Ngoài tất cả hàm",
+      "Trong header file",
+      "Không thể khai báo",
+    ],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Biến cục bộ có phạm vi như thế nào?",
+    [
+      "Toàn chương trình",
+      "Chỉ trong hàm",
+      "Chỉ trong file",
+      "Không có phạm vi",
+    ],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Từ khóa nào định nghĩa hằng số?",
+    ["#define", "const", "Cả hai", "Không có"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "Cách viết hằng số đúng?",
+    [
+      "const int MAX = 100;",
+      "int const = 100;",
+      "MAX const int = 100;",
+      "Tất cả đều sai",
+    ],
+    0
+  );
+  add(
+    "Cú pháp",
+    "Compiler C++ phổ biến là gì?",
+    ["gcc/g++", "javac", "python", "node"],
+    0
+  );
   add("Cú pháp", "File C++ có đuôi gì?", [".c", ".cpp", ".java", ".py"], 1);
-  add("Cú pháp", "Lệnh biên dịch C++ cơ bản?", ["g++ file.cpp", "javac file.cpp", "python file.cpp", "node file.cpp"], 0);
-  add("Cú pháp", "Header file C++ có đuôi gì?", [".h", ".hpp", ".hxx", "Tất cả đều đúng"], 3);
-  add("Cú pháp", "Preprocessor directive bắt đầu bằng?", ["@", "#", "$", "%"], 1);
-  add("Cú pháp", "Từ khóa auto trong C++11 có tác dụng gì?", ["Tự động gán giá trị", "Tự động suy luận kiểu", "Tự động xóa biến", "Không có tác dụng"], 1);
-  add("Cú pháp", "nullptr trong C++11 thay thế cho gì?", ["0", "NULL", "false", "Cả A và B"], 3);
-  add("Cú pháp", "Range-based for loop có từ C++ phiên bản nào?", ["C++98", "C++03", "C++11", "C++14"], 2);
-  add("Cú pháp", "Từ khóa decltype có tác dụng gì?", ["Khai báo kiểu", "Lấy kiểu của biểu thức", "Xóa kiểu", "Chuyển đổi kiểu"], 1);
-  add("Cú pháp", "Uniform initialization {} có từ C++ nào?", ["C++98", "C++03", "C++11", "C++14"], 2);
-  add("Cú pháp", "Lambda expression có từ C++ nào?", ["C++98", "C++03", "C++11", "C++14"], 2);
-  add("Cú pháp", "Move semantics có từ C++ nào?", ["C++98", "C++03", "C++11", "C++14"], 2);
-  add("Cú pháp", "Smart pointer có từ C++ nào?", ["C++98", "C++03", "C++11", "C++14"], 2);
-  add("Cú pháp", "Constexpr có từ C++ nào?", ["C++98", "C++03", "C++11", "C++14"], 2);
-  add("Cú pháp", "std::string có trong header nào?", ["<iostream>", "<string>", "<cstring>", "<algorithm>"], 1);
+  add(
+    "Cú pháp",
+    "Lệnh biên dịch C++ cơ bản?",
+    ["g++ file.cpp", "javac file.cpp", "python file.cpp", "node file.cpp"],
+    0
+  );
+  add(
+    "Cú pháp",
+    "Header file C++ có đuôi gì?",
+    [".h", ".hpp", ".hxx", "Tất cả đều đúng"],
+    3
+  );
+  add(
+    "Cú pháp",
+    "Preprocessor directive bắt đầu bằng?",
+    ["@", "#", "$", "%"],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Từ khóa auto trong C++11 có tác dụng gì?",
+    [
+      "Tự động gán giá trị",
+      "Tự động suy luận kiểu",
+      "Tự động xóa biến",
+      "Không có tác dụng",
+    ],
+    1
+  );
+  add(
+    "Cú pháp",
+    "nullptr trong C++11 thay thế cho gì?",
+    ["0", "NULL", "false", "Cả A và B"],
+    3
+  );
+  add(
+    "Cú pháp",
+    "Range-based for loop có từ C++ phiên bản nào?",
+    ["C++98", "C++03", "C++11", "C++14"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "Từ khóa decltype có tác dụng gì?",
+    ["Khai báo kiểu", "Lấy kiểu của biểu thức", "Xóa kiểu", "Chuyển đổi kiểu"],
+    1
+  );
+  add(
+    "Cú pháp",
+    "Uniform initialization {} có từ C++ nào?",
+    ["C++98", "C++03", "C++11", "C++14"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "Lambda expression có từ C++ nào?",
+    ["C++98", "C++03", "C++11", "C++14"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "Move semantics có từ C++ nào?",
+    ["C++98", "C++03", "C++11", "C++14"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "Smart pointer có từ C++ nào?",
+    ["C++98", "C++03", "C++11", "C++14"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "Constexpr có từ C++ nào?",
+    ["C++98", "C++03", "C++11", "C++14"],
+    2
+  );
+  add(
+    "Cú pháp",
+    "std::string có trong header nào?",
+    ["<iostream>", "<string>", "<cstring>", "<algorithm>"],
+    1
+  );
 
   // 2. I/O - Nhập xuất (40 câu)
   add("I/O", "Toán tử xuất ra cout là gì?", [">>", "<<", "<>", "><"], 1);
   add("I/O", "Toán tử nhập từ cin là gì?", [">>", "<<", "<>", "><"], 0);
-  add("I/O", "Header file cho cin/cout là gì?", ["<stdio.h>", "<iostream>", "<conio.h>", "<string>"], 1);
-  add("I/O", "Cách xuất số nguyên x ra màn hình?", ["cout << x;", "printf(x);", "print x;", "console.log(x);"], 0);
-  add("I/O", "Cách nhập số nguyên x từ bàn phím?", ["cin >> x;", "scanf(x);", "input x;", "read x;"], 0);
-  add("I/O", "endl có tác dụng gì?", ["Xuống dòng", "Tab", "Khoảng trắng", "Kết thúc"], 0);
-  add("I/O", "\\n và endl khác nhau như thế nào?", ["Không khác", "endl flush buffer", "\\n nhanh hơn", "B và C đúng"], 3);
-  add("I/O", "Xuất nhiều giá trị cùng lúc như thế nào?", ["cout << a << b;", "cout >> a >> b;", "print a, b;", "printf(a, b);"], 0);
-  add("I/O", "Nhập nhiều giá trị cùng lúc như thế nào?", ["cin >> a >> b;", "cin << a << b;", "scanf(a, b);", "input a, b;"], 0);
-  add("I/O", "Đọc chuỗi có khoảng trắng dùng gì?", ["cin >>", "getline()", "cin.get()", "B và C đúng"], 3);
-  add("I/O", "cin.get() có tác dụng gì?", ["Đọc một ký tự", "Đọc một dòng", "Đọc một số", "Xóa buffer"], 0);
-  add("I/O", "cin.ignore() có tác dụng gì?", ["Bỏ qua ký tự", "Đọc ký tự", "Xóa màn hình", "Kết thúc nhập"], 0);
-  add("I/O", "getline(cin, s) đọc vào đâu?", ["char array", "string", "int", "float"], 1);
-  add("I/O", "Làm thế nào xóa buffer sau cin?", ["cin.clear()", "cin.ignore()", "fflush()", "cin.flush()"], 1);
-  add("I/O", "cout << fixed có tác dụng gì?", ["In số nguyên", "In số thập phân cố định", "In chuỗi", "In ký tự"], 1);
-  add("I/O", "cout << setprecision(2) làm gì?", ["Set 2 chữ số thập phân", "Set 2 chữ số nguyên", "Set độ rộng 2", "Không có tác dụng"], 0);
-  add("I/O", "Header file cho setprecision là gì?", ["<iostream>", "<iomanip>", "<cmath>", "<string>"], 1);
-  add("I/O", "cout << setw(5) có tác dụng gì?", ["Set độ rộng 5", "Set 5 chữ số", "Set 5 dòng", "Không có tác dụng"], 0);
-  add("I/O", "cout << left có tác dụng gì?", ["Canh trái", "Canh phải", "Canh giữa", "Không có tác dụng"], 0);
-  add("I/O", "cout << right có tác dụng gì?", ["Canh trái", "Canh phải", "Canh giữa", "Không có tác dụng"], 1);
-  add("I/O", "Đọc file trong C++ dùng gì?", ["ifstream", "ofstream", "fstream", "Tất cả đều đúng"], 0);
-  add("I/O", "Ghi file trong C++ dùng gì?", ["ifstream", "ofstream", "fstream", "iostream"], 1);
-  add("I/O", "Header file cho file I/O là gì?", ["<iostream>", "<fstream>", "<stdio.h>", "<conio.h>"], 1);
-  add("I/O", "Kiểm tra file mở thành công như thế nào?", ["file.is_open()", "file.good()", "file.fail()", "Tất cả đều đúng"], 3);
-  add("I/O", "Đóng file như thế nào?", ["file.close()", "fclose(file)", "close(file)", "file.end()"], 0);
-  add("I/O", "std::cin.fail() trả về gì?", ["true nếu lỗi nhập", "false nếu lỗi", "Số lỗi", "Không có"], 0);
-  add("I/O", "Xóa trạng thái lỗi cin như thế nào?", ["cin.clear()", "cin.reset()", "cin.flush()", "cin.good()"], 0);
-  add("I/O", "Printf trong C++ cần header gì?", ["<iostream>", "<cstdio>", "<stdio.h>", "B và C đúng"], 3);
-  add("I/O", "Scanf trong C++ cần header gì?", ["<iostream>", "<cstdio>", "<stdio.h>", "B và C đúng"], 3);
-  add("I/O", "cout << hex có tác dụng gì?", ["In hệ 16", "In hệ 8", "In hệ 2", "In hệ 10"], 0);
-  add("I/O", "cout << oct có tác dụng gì?", ["In hệ 16", "In hệ 8", "In hệ 2", "In hệ 10"], 1);
-  add("I/O", "cout << dec có tác dụng gì?", ["In hệ 16", "In hệ 8", "In hệ 2", "In hệ 10"], 3);
-  add("I/O", "cout << boolalpha có tác dụng gì?", ["In true/false", "In 1/0", "In yes/no", "Không có"], 0);
-  add("I/O", "stringstream có trong header nào?", ["<iostream>", "<sstream>", "<string>", "<algorithm>"], 1);
-  add("I/O", "ostringstream dùng để làm gì?", ["Đọc chuỗi", "Ghi vào chuỗi", "Xóa chuỗi", "So sánh chuỗi"], 1);
-  add("I/O", "istringstream dùng để làm gì?", ["Đọc từ chuỗi", "Ghi vào chuỗi", "Xóa chuỗi", "So sánh chuỗi"], 0);
-  add("I/O", "cin >> x khi x là string sẽ?", ["Đọc cả dòng", "Đọc đến khoảng trắng", "Đọc 1 ký tự", "Báo lỗi"], 1);
-  add("I/O", "Cách nào tốt nhất để flush cout?", ["cout.flush()", "cout << flush", "endl", "Tất cả đều đúng"], 3);
-  add("I/O", "cerr và cout khác nhau như thế nào?", ["cerr cho lỗi", "cerr không buffer", "cerr ra stderr", "Tất cả đều đúng"], 3);
-  add("I/O", "clog trong C++ là gì?", ["Buffered error output", "Console log", "C log", "Không tồn tại"], 0);
+  add(
+    "I/O",
+    "Header file cho cin/cout là gì?",
+    ["<stdio.h>", "<iostream>", "<conio.h>", "<string>"],
+    1
+  );
+  add(
+    "I/O",
+    "Cách xuất số nguyên x ra màn hình?",
+    ["cout << x;", "printf(x);", "print x;", "console.log(x);"],
+    0
+  );
+  add(
+    "I/O",
+    "Cách nhập số nguyên x từ bàn phím?",
+    ["cin >> x;", "scanf(x);", "input x;", "read x;"],
+    0
+  );
+  add(
+    "I/O",
+    "endl có tác dụng gì?",
+    ["Xuống dòng", "Tab", "Khoảng trắng", "Kết thúc"],
+    0
+  );
+  add(
+    "I/O",
+    "\\n và endl khác nhau như thế nào?",
+    ["Không khác", "endl flush buffer", "\\n nhanh hơn", "B và C đúng"],
+    3
+  );
+  add(
+    "I/O",
+    "Xuất nhiều giá trị cùng lúc như thế nào?",
+    ["cout << a << b;", "cout >> a >> b;", "print a, b;", "printf(a, b);"],
+    0
+  );
+  add(
+    "I/O",
+    "Nhập nhiều giá trị cùng lúc như thế nào?",
+    ["cin >> a >> b;", "cin << a << b;", "scanf(a, b);", "input a, b;"],
+    0
+  );
+  add(
+    "I/O",
+    "Đọc chuỗi có khoảng trắng dùng gì?",
+    ["cin >>", "getline()", "cin.get()", "B và C đúng"],
+    3
+  );
+  add(
+    "I/O",
+    "cin.get() có tác dụng gì?",
+    ["Đọc một ký tự", "Đọc một dòng", "Đọc một số", "Xóa buffer"],
+    0
+  );
+  add(
+    "I/O",
+    "cin.ignore() có tác dụng gì?",
+    ["Bỏ qua ký tự", "Đọc ký tự", "Xóa màn hình", "Kết thúc nhập"],
+    0
+  );
+  add(
+    "I/O",
+    "getline(cin, s) đọc vào đâu?",
+    ["char array", "string", "int", "float"],
+    1
+  );
+  add(
+    "I/O",
+    "Làm thế nào xóa buffer sau cin?",
+    ["cin.clear()", "cin.ignore()", "fflush()", "cin.flush()"],
+    1
+  );
+  add(
+    "I/O",
+    "cout << fixed có tác dụng gì?",
+    ["In số nguyên", "In số thập phân cố định", "In chuỗi", "In ký tự"],
+    1
+  );
+  add(
+    "I/O",
+    "cout << setprecision(2) làm gì?",
+    [
+      "Set 2 chữ số thập phân",
+      "Set 2 chữ số nguyên",
+      "Set độ rộng 2",
+      "Không có tác dụng",
+    ],
+    0
+  );
+  add(
+    "I/O",
+    "Header file cho setprecision là gì?",
+    ["<iostream>", "<iomanip>", "<cmath>", "<string>"],
+    1
+  );
+  add(
+    "I/O",
+    "cout << setw(5) có tác dụng gì?",
+    ["Set độ rộng 5", "Set 5 chữ số", "Set 5 dòng", "Không có tác dụng"],
+    0
+  );
+  add(
+    "I/O",
+    "cout << left có tác dụng gì?",
+    ["Canh trái", "Canh phải", "Canh giữa", "Không có tác dụng"],
+    0
+  );
+  add(
+    "I/O",
+    "cout << right có tác dụng gì?",
+    ["Canh trái", "Canh phải", "Canh giữa", "Không có tác dụng"],
+    1
+  );
+  add(
+    "I/O",
+    "Đọc file trong C++ dùng gì?",
+    ["ifstream", "ofstream", "fstream", "Tất cả đều đúng"],
+    0
+  );
+  add(
+    "I/O",
+    "Ghi file trong C++ dùng gì?",
+    ["ifstream", "ofstream", "fstream", "iostream"],
+    1
+  );
+  add(
+    "I/O",
+    "Header file cho file I/O là gì?",
+    ["<iostream>", "<fstream>", "<stdio.h>", "<conio.h>"],
+    1
+  );
+  add(
+    "I/O",
+    "Kiểm tra file mở thành công như thế nào?",
+    ["file.is_open()", "file.good()", "file.fail()", "Tất cả đều đúng"],
+    3
+  );
+  add(
+    "I/O",
+    "Đóng file như thế nào?",
+    ["file.close()", "fclose(file)", "close(file)", "file.end()"],
+    0
+  );
+  add(
+    "I/O",
+    "std::cin.fail() trả về gì?",
+    ["true nếu lỗi nhập", "false nếu lỗi", "Số lỗi", "Không có"],
+    0
+  );
+  add(
+    "I/O",
+    "Xóa trạng thái lỗi cin như thế nào?",
+    ["cin.clear()", "cin.reset()", "cin.flush()", "cin.good()"],
+    0
+  );
+  add(
+    "I/O",
+    "Printf trong C++ cần header gì?",
+    ["<iostream>", "<cstdio>", "<stdio.h>", "B và C đúng"],
+    3
+  );
+  add(
+    "I/O",
+    "Scanf trong C++ cần header gì?",
+    ["<iostream>", "<cstdio>", "<stdio.h>", "B và C đúng"],
+    3
+  );
+  add(
+    "I/O",
+    "cout << hex có tác dụng gì?",
+    ["In hệ 16", "In hệ 8", "In hệ 2", "In hệ 10"],
+    0
+  );
+  add(
+    "I/O",
+    "cout << oct có tác dụng gì?",
+    ["In hệ 16", "In hệ 8", "In hệ 2", "In hệ 10"],
+    1
+  );
+  add(
+    "I/O",
+    "cout << dec có tác dụng gì?",
+    ["In hệ 16", "In hệ 8", "In hệ 2", "In hệ 10"],
+    3
+  );
+  add(
+    "I/O",
+    "cout << boolalpha có tác dụng gì?",
+    ["In true/false", "In 1/0", "In yes/no", "Không có"],
+    0
+  );
+  add(
+    "I/O",
+    "stringstream có trong header nào?",
+    ["<iostream>", "<sstream>", "<string>", "<algorithm>"],
+    1
+  );
+  add(
+    "I/O",
+    "ostringstream dùng để làm gì?",
+    ["Đọc chuỗi", "Ghi vào chuỗi", "Xóa chuỗi", "So sánh chuỗi"],
+    1
+  );
+  add(
+    "I/O",
+    "istringstream dùng để làm gì?",
+    ["Đọc từ chuỗi", "Ghi vào chuỗi", "Xóa chuỗi", "So sánh chuỗi"],
+    0
+  );
+  add(
+    "I/O",
+    "cin >> x khi x là string sẽ?",
+    ["Đọc cả dòng", "Đọc đến khoảng trắng", "Đọc 1 ký tự", "Báo lỗi"],
+    1
+  );
+  add(
+    "I/O",
+    "Cách nào tốt nhất để flush cout?",
+    ["cout.flush()", "cout << flush", "endl", "Tất cả đều đúng"],
+    3
+  );
+  add(
+    "I/O",
+    "cerr và cout khác nhau như thế nào?",
+    ["cerr cho lỗi", "cerr không buffer", "cerr ra stderr", "Tất cả đều đúng"],
+    3
+  );
+  add(
+    "I/O",
+    "clog trong C++ là gì?",
+    ["Buffered error output", "Console log", "C log", "Không tồn tại"],
+    0
+  );
 
   // 3. Toán tử (40 câu)
-  add("Toán tử", "Toán tử số học cơ bản gồm?", ["+ - * /", "+ - * / %", "chỉ + -", "+ - * / ^ %"], 1);
-  add("Toán tử", "Toán tử % có tác dụng gì?", ["Chia", "Chia lấy dư", "Phần trăm", "Lũy thừa"], 1);
+  add(
+    "Toán tử",
+    "Toán tử số học cơ bản gồm?",
+    ["+ - * /", "+ - * / %", "chỉ + -", "+ - * / ^ %"],
+    1
+  );
+  add(
+    "Toán tử",
+    "Toán tử % có tác dụng gì?",
+    ["Chia", "Chia lấy dư", "Phần trăm", "Lũy thừa"],
+    1
+  );
   add("Toán tử", "5 % 3 bằng bao nhiêu?", ["1", "2", "0", "1.67"], 1);
-  add("Toán tử", "Toán tử ++ có tác dụng gì?", ["Cộng 2", "Tăng 1", "Nhân 2", "Không có"], 1);
-  add("Toán tử", "++x và x++ khác nhau như thế nào?", ["Không khác", "++x tăng trước", "x++ tăng sau", "B và C đúng"], 3);
+  add(
+    "Toán tử",
+    "Toán tử ++ có tác dụng gì?",
+    ["Cộng 2", "Tăng 1", "Nhân 2", "Không có"],
+    1
+  );
+  add(
+    "Toán tử",
+    "++x và x++ khác nhau như thế nào?",
+    ["Không khác", "++x tăng trước", "x++ tăng sau", "B và C đúng"],
+    3
+  );
   add("Toán tử", "Toán tử so sánh bằng là gì?", ["=", "==", "===", "eq"], 1);
   add("Toán tử", "Toán tử gán là gì?", ["=", "==", ":=", "->"], 0);
-  add("Toán tử", "Toán tử != có nghĩa gì?", ["Bằng", "Không bằng", "Lớn hơn", "Nhỏ hơn"], 1);
-  add("Toán tử", "Toán tử && là gì?", ["Logic AND", "Logic OR", "Bitwise AND", "Gán"], 0);
-  add("Toán tử", "Toán tử || là gì?", ["Logic AND", "Logic OR", "Bitwise OR", "Gán"], 1);
+  add(
+    "Toán tử",
+    "Toán tử != có nghĩa gì?",
+    ["Bằng", "Không bằng", "Lớn hơn", "Nhỏ hơn"],
+    1
+  );
+  add(
+    "Toán tử",
+    "Toán tử && là gì?",
+    ["Logic AND", "Logic OR", "Bitwise AND", "Gán"],
+    0
+  );
+  add(
+    "Toán tử",
+    "Toán tử || là gì?",
+    ["Logic AND", "Logic OR", "Bitwise OR", "Gán"],
+    1
+  );
   add("Toán tử", "true && false bằng gì?", ["true", "false", "1", "0"], 1);
   add("Toán tử", "true || false bằng gì?", ["true", "false", "1", "0"], 0);
-  add("Toán tử", "Toán tử & là gì?", ["Logic AND", "Bitwise AND", "Address", "Cả B và C"], 3);
-  add("Toán tử", "Toán tử << là gì?", ["Shift left", "Stream output", "Cả hai", "Không có"], 2);
-  add("Toán tử", "Toán tử >> là gì?", ["Shift right", "Stream input", "Cả hai", "Không có"], 2);
-  add("Toán tử", "Toán tử += có tác dụng gì?", ["x = x + y", "x += y", "Cả hai", "Không có"], 2);
-  add("Toán tử", "x *= 3 tương đương với gì?", ["x = x * 3", "x = 3 * x", "Cả hai", "x = x + 3"], 2);
-  add("Toán tử", "Toán tử ?: là gì?", ["Conditional operator", "Ternary operator", "Cả hai", "Không tồn tại"], 2);
-  add("Toán tử", "(x > 0) ? 1 : -1 có nghĩa gì?", ["Nếu x > 0 thì 1, ngược lại -1", "x > 0 và 1", "x > 0 hoặc -1", "Lỗi cú pháp"], 0);
-  add("Toán tử", "Toán tử sizeof trả về gì?", ["Kích thước tính bằng byte", "Kích thước tính bằng bit", "Địa chỉ", "Giá trị"], 0);
-  add("Toán tử", "Độ ưu tiên của * và + như thế nào?", ["* cao hơn +", "+ cao hơn *", "Bằng nhau", "Tùy context"], 0);
-  add("Toán tử", "Độ ưu tiên của && và || như thế nào?", ["&& cao hơn ||", "|| cao hơn &&", "Bằng nhau", "Tùy context"], 0);
-  add("Toán tử", "Thứ tự kết hợp của = như thế nào?", ["Trái sang phải", "Phải sang trái", "Không có", "Tùy context"], 1);
-  add("Toán tử", "a = b = c = 5 sẽ làm gì?", ["Lỗi", "a, b, c đều = 5", "Chỉ c = 5", "Chỉ a = 5"], 1);
-  add("Toán tử", "Toán tử nào có độ ưu tiên cao nhất?", ["()", "*", "+", "="], 0);
-  add("Toán tử", "Short-circuit evaluation áp dụng với?", ["&&", "||", "Cả hai", "Không có"], 2);
-  add("Toán tử", "false && (x++) sẽ làm gì với x?", ["x tăng 1", "x không đổi", "x = 0", "Lỗi"], 1);
-  add("Toán tử", "true || (x++) sẽ làm gì với x?", ["x tăng 1", "x không đổi", "x = 0", "Lỗi"], 1);
-  add("Toán tử", "Ép kiểu (cast) trong C++ như thế nào?", ["(int)x", "int(x)", "static_cast<int>(x)", "Tất cả đều đúng"], 3);
-  add("Toán tử", "dynamic_cast dùng cho gì?", ["Ép kiểu cơ bản", "Ép kiểu đa hình", "Ép kiểu const", "Ép kiểu pointer"], 1);
-  add("Toán tử", "const_cast dùng để làm gì?", ["Ép kiểu const", "Loại bỏ const", "Thêm const", "B và C"], 3);
-  add("Toán tử", "reinterpret_cast dùng cho gì?", ["Ép kiểu an toàn", "Ép kiểu không an toàn", "Ép kiểu tự động", "Không dùng"], 1);
-  add("Toán tử", "Operator overloading là gì?", ["Nạp chồng toán tử", "Thay đổi toán tử", "Tạo toán tử mới", "Xóa toán tử"], 0);
-  add("Toán tử", "Comma operator có tác dụng gì?", ["Ngăn cách", "Thực hiện tuần tự", "Cả hai", "Không có"], 2);
-  add("Toán tử", "Toán tử . và -> khác nhau ntn?", [". cho object, -> cho pointer", ". cho pointer, -> cho object", "Không khác", "Chỉ khác cú pháp"], 0);
-  add("Toán tử", "Toán tử [] dùng cho gì?", ["Array subscript", "Function call", "Member access", "Cast"], 0);
+  add(
+    "Toán tử",
+    "Toán tử & là gì?",
+    ["Logic AND", "Bitwise AND", "Address", "Cả B và C"],
+    3
+  );
+  add(
+    "Toán tử",
+    "Toán tử << là gì?",
+    ["Shift left", "Stream output", "Cả hai", "Không có"],
+    2
+  );
+  add(
+    "Toán tử",
+    "Toán tử >> là gì?",
+    ["Shift right", "Stream input", "Cả hai", "Không có"],
+    2
+  );
+  add(
+    "Toán tử",
+    "Toán tử += có tác dụng gì?",
+    ["x = x + y", "x += y", "Cả hai", "Không có"],
+    2
+  );
+  add(
+    "Toán tử",
+    "x *= 3 tương đương với gì?",
+    ["x = x * 3", "x = 3 * x", "Cả hai", "x = x + 3"],
+    2
+  );
+  add(
+    "Toán tử",
+    "Toán tử ?: là gì?",
+    ["Conditional operator", "Ternary operator", "Cả hai", "Không tồn tại"],
+    2
+  );
+  add(
+    "Toán tử",
+    "(x > 0) ? 1 : -1 có nghĩa gì?",
+    [
+      "Nếu x > 0 thì 1, ngược lại -1",
+      "x > 0 và 1",
+      "x > 0 hoặc -1",
+      "Lỗi cú pháp",
+    ],
+    0
+  );
+  add(
+    "Toán tử",
+    "Toán tử sizeof trả về gì?",
+    [
+      "Kích thước tính bằng byte",
+      "Kích thước tính bằng bit",
+      "Địa chỉ",
+      "Giá trị",
+    ],
+    0
+  );
+  add(
+    "Toán tử",
+    "Độ ưu tiên của * và + như thế nào?",
+    ["* cao hơn +", "+ cao hơn *", "Bằng nhau", "Tùy context"],
+    0
+  );
+  add(
+    "Toán tử",
+    "Độ ưu tiên của && và || như thế nào?",
+    ["&& cao hơn ||", "|| cao hơn &&", "Bằng nhau", "Tùy context"],
+    0
+  );
+  add(
+    "Toán tử",
+    "Thứ tự kết hợp của = như thế nào?",
+    ["Trái sang phải", "Phải sang trái", "Không có", "Tùy context"],
+    1
+  );
+  add(
+    "Toán tử",
+    "a = b = c = 5 sẽ làm gì?",
+    ["Lỗi", "a, b, c đều = 5", "Chỉ c = 5", "Chỉ a = 5"],
+    1
+  );
+  add(
+    "Toán tử",
+    "Toán tử nào có độ ưu tiên cao nhất?",
+    ["()", "*", "+", "="],
+    0
+  );
+  add(
+    "Toán tử",
+    "Short-circuit evaluation áp dụng với?",
+    ["&&", "||", "Cả hai", "Không có"],
+    2
+  );
+  add(
+    "Toán tử",
+    "false && (x++) sẽ làm gì với x?",
+    ["x tăng 1", "x không đổi", "x = 0", "Lỗi"],
+    1
+  );
+  add(
+    "Toán tử",
+    "true || (x++) sẽ làm gì với x?",
+    ["x tăng 1", "x không đổi", "x = 0", "Lỗi"],
+    1
+  );
+  add(
+    "Toán tử",
+    "Ép kiểu (cast) trong C++ như thế nào?",
+    ["(int)x", "int(x)", "static_cast<int>(x)", "Tất cả đều đúng"],
+    3
+  );
+  add(
+    "Toán tử",
+    "dynamic_cast dùng cho gì?",
+    ["Ép kiểu cơ bản", "Ép kiểu đa hình", "Ép kiểu const", "Ép kiểu pointer"],
+    1
+  );
+  add(
+    "Toán tử",
+    "const_cast dùng để làm gì?",
+    ["Ép kiểu const", "Loại bỏ const", "Thêm const", "B và C"],
+    3
+  );
+  add(
+    "Toán tử",
+    "reinterpret_cast dùng cho gì?",
+    [
+      "Ép kiểu an toàn",
+      "Ép kiểu không an toàn",
+      "Ép kiểu tự động",
+      "Không dùng",
+    ],
+    1
+  );
+  add(
+    "Toán tử",
+    "Operator overloading là gì?",
+    ["Nạp chồng toán tử", "Thay đổi toán tử", "Tạo toán tử mới", "Xóa toán tử"],
+    0
+  );
+  add(
+    "Toán tử",
+    "Comma operator có tác dụng gì?",
+    ["Ngăn cách", "Thực hiện tuần tự", "Cả hai", "Không có"],
+    2
+  );
+  add(
+    "Toán tử",
+    "Toán tử . và -> khác nhau ntn?",
+    [
+      ". cho object, -> cho pointer",
+      ". cho pointer, -> cho object",
+      "Không khác",
+      "Chỉ khác cú pháp",
+    ],
+    0
+  );
+  add(
+    "Toán tử",
+    "Toán tử [] dùng cho gì?",
+    ["Array subscript", "Function call", "Member access", "Cast"],
+    0
+  );
   add("Toán tử", "Toán tử () có mấy ý nghĩa?", ["1", "2", "3", "Nhiều"], 3);
-  add("Toán tử", "Scope resolution operator là gì?", ["::", "->", ".", "::*"], 0);
-  add("Toán tử", "Member pointer operator là gì?", [".*", "->*", "Cả hai", "::"], 2);
+  add(
+    "Toán tử",
+    "Scope resolution operator là gì?",
+    ["::", "->", ".", "::*"],
+    0
+  );
+  add(
+    "Toán tử",
+    "Member pointer operator là gì?",
+    [".*", "->*", "Cả hai", "::"],
+    2
+  );
   add("Toán tử", "Toán tử mới trong C++20?", ["<=>", "<=", ">=", "=="], 0);
-  add("Toán tử", "spaceship operator <=> trả về gì?", ["int", "bool", "ordering", "void"], 2);
+  add(
+    "Toán tử",
+    "spaceship operator <=> trả về gì?",
+    ["int", "bool", "ordering", "void"],
+    2
+  );
 
   // 4. Điều kiện & Vòng lặp (40 câu)
-  add("Điều kiện", "Cấu trúc if cơ bản có dạng nào?", ["if (condition)", "if condition", "if [condition]", "if {condition}"], 0);
-  add("Điều kiện", "else luôn đi kèm với gì?", ["if", "while", "for", "switch"], 0);
-  add("Điều kiện", "else if dùng khi nào?", ["Nhiều điều kiện", "Chỉ 2 điều kiện", "Vòng lặp", "Switch case"], 0);
-  add("Điều kiện", "switch case dùng với kiểu dữ liệu nào?", ["int/char", "float", "string", "array"], 0);
-  add("Điều kiện", "break trong switch có tác dụng gì?", ["Thoát switch", "Tiếp tục case tiếp", "Lặp lại", "Không có"], 0);
-  add("Điều kiện", "default trong switch dùng khi nào?", ["Không case nào match", "Case đầu tiên", "Case cuối", "Mọi case"], 0);
-  add("Điều kiện", "Vòng lặp for có cấu trúc như thế nào?", ["for(init; condition; update)", "for(condition)", "for(init; update)", "for(condition; update)"], 0);
-  add("Điều kiện", "Vòng lặp while kiểm tra điều kiện khi nào?", ["Trước mỗi lần lặp", "Sau mỗi lần lặp", "Chỉ lần đầu", "Chỉ lần cuối"], 0);
-  add("Điều kiện", "Vòng lặp do-while khác while ở điểm nào?", ["Kiểm tra điều kiện sau", "Không có khác biệt", "Chạy nhanh hơn", "Cú pháp khác"], 0);
-  add("Điều kiện", "Vòng lặp nào chạy ít nhất 1 lần?", ["for", "while", "do-while", "Tất cả"], 2);
-  add("Điều kiện", "break trong vòng lặp có tác dụng gì?", ["Thoát vòng lặp", "Bỏ qua lần lặp", "Tiếp tục lặp", "Không có"], 0);
-  add("Điều kiện", "continue trong vòng lặp có tác dụng gì?", ["Thoát vòng lặp", "Bỏ qua lần lặp hiện tại", "Lặp lại", "Không có"], 1);
-  add("Điều kiện", "for(;;) có nghĩa gì?", ["Vòng lặp vô hạn", "Vòng lặp 0 lần", "Lỗi cú pháp", "Không có nghĩa"], 0);
-  add("Điều kiện", "while(true) có nghĩa gì?", ["Vòng lặp vô hạn", "Vòng lặp 1 lần", "Lỗi cú pháp", "Không chạy"], 0);
-  add("Điều kiện", "Nested loop là gì?", ["Vòng lặp lồng nhau", "Hai vòng lặp riêng", "Vòng lặp sai", "Không tồn tại"], 0);
-  add("Điều kiện", "for(int i=0; i<5; i++) chạy mấy lần?", ["4", "5", "6", "Vô hạn"], 1);
-  add("Điều kiện", "for(int i=1; i<=5; i++) chạy mấy lần?", ["4", "5", "6", "Vô hạn"], 1);
-  add("Điều kiện", "for(int i=5; i>0; i--) chạy mấy lần?", ["4", "5", "6", "0"], 1);
-  add("Điều kiện", "Lỗi off-by-one thường xảy ra khi nào?", ["Điều kiện dừng sai", "Khởi tạo sai", "Update sai", "Tất cả"], 3);
-  add("Điều kiện", "goto trong C++ có nên dùng không?", ["Nên", "Không nên", "Tùy trường hợp", "Không tồn tại"], 1);
-  add("Điều kiện", "Label cho goto viết như thế nào?", ["label:", ":label", "goto label", "label;"], 0);
-  add("Điều kiện", "Range-based for loop có cú pháp nào?", ["for(auto x : container)", "for(x in container)", "for x in container", "for(x of container)"], 0);
-  add("Điều kiện", "Range-based for loop có từ C++ nào?", ["C++98", "C++03", "C++11", "C++14"], 2);
-  add("Điều kiện", "if constexpr có từ C++ nào?", ["C++11", "C++14", "C++17", "C++20"], 2);
-  add("Điều kiện", "switch với string có được không?", ["C++98: không", "C++11: có", "Không bao giờ", "A đúng"], 0);
-  add("Điều kiện", "Fallthrough trong switch là gì?", ["Không có break", "Có break", "Default case", "Lỗi"], 0);
-  add("Điều kiện", "[[fallthrough]] attribute có tác dụng gì?", ["Chỉ định fallthrough cố ý", "Ngăn fallthrough", "Báo lỗi", "Không có"], 0);
-  add("Điều kiện", "Điều kiện trong if phải có kiểu gì?", ["bool", "int", "Convertible to bool", "C đúng"], 3);
-  add("Điều kiện", "if(0) sẽ thực hiện không?", ["Có", "Không", "Lỗi", "Tùy compiler"], 1);
-  add("Điều kiện", "if(1) sẽ thực hiện không?", ["Có", "Không", "Lỗi", "Tùy compiler"], 0);
-  add("Điều kiện", "Comma operator trong for loop hoạt động ntn?", ["Thực hiện tuần tự", "Chỉ lấy giá trị cuối", "Cả hai", "Lỗi"], 2);
-  add("Điều kiện", "for(int i=0, j=5; i<j; i++, j--) hợp lệ?", ["Có", "Không", "Lỗi cú pháp", "Tùy compiler"], 0);
-  add("Điều kiện", "break trong vòng lặp lồng thoát mấy cấp?", ["1 cấp", "Tất cả", "2 cấp", "Tùy context"], 0);
-  add("Điều kiện", "continue trong vòng lặp lồng ảnh hưởng cấp nào?", ["Cấp hiện tại", "Tất cả cấp", "Cấp ngoài", "Cấp trong"], 0);
-  add("Điều kiện", "Infinite loop có thể thoát bằng gì?", ["break", "return", "exit()", "Tất cả"], 3);
-  add("Điều kiện", "while(cin >> x) có nghĩa gì?", ["Đọc đến EOF", "Đọc 1 lần", "Đọc vô hạn", "Lỗi"], 0);
-  add("Điều kiện", "Loop unrolling là kỹ thuật gì?", ["Tối ưu hóa vòng lặp", "Tạo vòng lặp", "Xóa vòng lặp", "Debug vòng lặp"], 0);
-  add("Điều kiện", "Condition variable trong if có thể là gì?", ["Expression", "Function call", "Assignment", "Tất cả"], 3);
-  add("Điều kiện", "Short-circuit evaluation áp dụng với if không?", ["Có", "Không", "Tùy trường hợp", "Không biết"], 0);
-  add("Điều kiện", "if(a && b) khi a false thì b có được kiểm tra?", ["Có", "Không", "Tùy compiler", "Lỗi"], 1);
-  add("Điều kiện", "structured binding có từ C++ nào?", ["C++11", "C++14", "C++17", "C++20"], 2);
+  add(
+    "Điều kiện",
+    "Cấu trúc if cơ bản có dạng nào?",
+    ["if (condition)", "if condition", "if [condition]", "if {condition}"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "else luôn đi kèm với gì?",
+    ["if", "while", "for", "switch"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "else if dùng khi nào?",
+    ["Nhiều điều kiện", "Chỉ 2 điều kiện", "Vòng lặp", "Switch case"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "switch case dùng với kiểu dữ liệu nào?",
+    ["int/char", "float", "string", "array"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "break trong switch có tác dụng gì?",
+    ["Thoát switch", "Tiếp tục case tiếp", "Lặp lại", "Không có"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "default trong switch dùng khi nào?",
+    ["Không case nào match", "Case đầu tiên", "Case cuối", "Mọi case"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Vòng lặp for có cấu trúc như thế nào?",
+    [
+      "for(init; condition; update)",
+      "for(condition)",
+      "for(init; update)",
+      "for(condition; update)",
+    ],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Vòng lặp while kiểm tra điều kiện khi nào?",
+    ["Trước mỗi lần lặp", "Sau mỗi lần lặp", "Chỉ lần đầu", "Chỉ lần cuối"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Vòng lặp do-while khác while ở điểm nào?",
+    [
+      "Kiểm tra điều kiện sau",
+      "Không có khác biệt",
+      "Chạy nhanh hơn",
+      "Cú pháp khác",
+    ],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Vòng lặp nào chạy ít nhất 1 lần?",
+    ["for", "while", "do-while", "Tất cả"],
+    2
+  );
+  add(
+    "Điều kiện",
+    "break trong vòng lặp có tác dụng gì?",
+    ["Thoát vòng lặp", "Bỏ qua lần lặp", "Tiếp tục lặp", "Không có"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "continue trong vòng lặp có tác dụng gì?",
+    ["Thoát vòng lặp", "Bỏ qua lần lặp hiện tại", "Lặp lại", "Không có"],
+    1
+  );
+  add(
+    "Điều kiện",
+    "for(;;) có nghĩa gì?",
+    ["Vòng lặp vô hạn", "Vòng lặp 0 lần", "Lỗi cú pháp", "Không có nghĩa"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "while(true) có nghĩa gì?",
+    ["Vòng lặp vô hạn", "Vòng lặp 1 lần", "Lỗi cú pháp", "Không chạy"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Nested loop là gì?",
+    [
+      "Vòng lặp lồng nhau",
+      "Hai vòng lặp riêng",
+      "Vòng lặp sai",
+      "Không tồn tại",
+    ],
+    0
+  );
+  add(
+    "Điều kiện",
+    "for(int i=0; i<5; i++) chạy mấy lần?",
+    ["4", "5", "6", "Vô hạn"],
+    1
+  );
+  add(
+    "Điều kiện",
+    "for(int i=1; i<=5; i++) chạy mấy lần?",
+    ["4", "5", "6", "Vô hạn"],
+    1
+  );
+  add(
+    "Điều kiện",
+    "for(int i=5; i>0; i--) chạy mấy lần?",
+    ["4", "5", "6", "0"],
+    1
+  );
+  add(
+    "Điều kiện",
+    "Lỗi off-by-one thường xảy ra khi nào?",
+    ["Điều kiện dừng sai", "Khởi tạo sai", "Update sai", "Tất cả"],
+    3
+  );
+  add(
+    "Điều kiện",
+    "goto trong C++ có nên dùng không?",
+    ["Nên", "Không nên", "Tùy trường hợp", "Không tồn tại"],
+    1
+  );
+  add(
+    "Điều kiện",
+    "Label cho goto viết như thế nào?",
+    ["label:", ":label", "goto label", "label;"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Range-based for loop có cú pháp nào?",
+    [
+      "for(auto x : container)",
+      "for(x in container)",
+      "for x in container",
+      "for(x of container)",
+    ],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Range-based for loop có từ C++ nào?",
+    ["C++98", "C++03", "C++11", "C++14"],
+    2
+  );
+  add(
+    "Điều kiện",
+    "if constexpr có từ C++ nào?",
+    ["C++11", "C++14", "C++17", "C++20"],
+    2
+  );
+  add(
+    "Điều kiện",
+    "switch với string có được không?",
+    ["C++98: không", "C++11: có", "Không bao giờ", "A đúng"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Fallthrough trong switch là gì?",
+    ["Không có break", "Có break", "Default case", "Lỗi"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "[[fallthrough]] attribute có tác dụng gì?",
+    ["Chỉ định fallthrough cố ý", "Ngăn fallthrough", "Báo lỗi", "Không có"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Điều kiện trong if phải có kiểu gì?",
+    ["bool", "int", "Convertible to bool", "C đúng"],
+    3
+  );
+  add(
+    "Điều kiện",
+    "if(0) sẽ thực hiện không?",
+    ["Có", "Không", "Lỗi", "Tùy compiler"],
+    1
+  );
+  add(
+    "Điều kiện",
+    "if(1) sẽ thực hiện không?",
+    ["Có", "Không", "Lỗi", "Tùy compiler"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Comma operator trong for loop hoạt động ntn?",
+    ["Thực hiện tuần tự", "Chỉ lấy giá trị cuối", "Cả hai", "Lỗi"],
+    2
+  );
+  add(
+    "Điều kiện",
+    "for(int i=0, j=5; i<j; i++, j--) hợp lệ?",
+    ["Có", "Không", "Lỗi cú pháp", "Tùy compiler"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "break trong vòng lặp lồng thoát mấy cấp?",
+    ["1 cấp", "Tất cả", "2 cấp", "Tùy context"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "continue trong vòng lặp lồng ảnh hưởng cấp nào?",
+    ["Cấp hiện tại", "Tất cả cấp", "Cấp ngoài", "Cấp trong"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Infinite loop có thể thoát bằng gì?",
+    ["break", "return", "exit()", "Tất cả"],
+    3
+  );
+  add(
+    "Điều kiện",
+    "while(cin >> x) có nghĩa gì?",
+    ["Đọc đến EOF", "Đọc 1 lần", "Đọc vô hạn", "Lỗi"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Loop unrolling là kỹ thuật gì?",
+    ["Tối ưu hóa vòng lặp", "Tạo vòng lặp", "Xóa vòng lặp", "Debug vòng lặp"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "Condition variable trong if có thể là gì?",
+    ["Expression", "Function call", "Assignment", "Tất cả"],
+    3
+  );
+  add(
+    "Điều kiện",
+    "Short-circuit evaluation áp dụng với if không?",
+    ["Có", "Không", "Tùy trường hợp", "Không biết"],
+    0
+  );
+  add(
+    "Điều kiện",
+    "if(a && b) khi a false thì b có được kiểm tra?",
+    ["Có", "Không", "Tùy compiler", "Lỗi"],
+    1
+  );
+  add(
+    "Điều kiện",
+    "structured binding có từ C++ nào?",
+    ["C++11", "C++14", "C++17", "C++20"],
+    2
+  );
 
   // Note: Hiện tại có 160 câu (4 chủ đề), cần thêm 7 chủ đề nữa
   // 5. Hàm, 6. Đệ quy, 7. Mảng 1D, 8. Mảng 2D, 9. Chuỗi, 10. Con trỏ, 11. Struct

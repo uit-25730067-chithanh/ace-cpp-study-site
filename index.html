@@ -8,7 +8,6 @@
     <script src="https://unpkg.com/vue@3.4.38/dist/vue.global.prod.js"></script>
     <link rel="stylesheet" href="style.css" />
     <script src="./data.js"></script>
-
   </head>
   <body>
     <div id="app">
@@ -18,18 +17,10 @@
           <a :class="{active: view==='home'}" href="#/home">Tổng quan</a>
           <a :class="{active: view==='chapters'}" href="#/chapters">Chương</a>
           <a :class="{active: view==='quizzes'}" href="#/quizzes">Đề ôn tập</a>
-          <a :class="{active: view==='flashcards'}" href="#/flashcards"
-            >Flashcards</a
-          >
-          <a :class="{active: view==='resources'}" href="#/resources"
-            >Tài liệu</a
-          >
-          <a :class="{active: view==='results'}" href="#/results"
-            >Bảng tổng kết</a
-          >
-          <a :class="{active: view==='official'}" href="#/official"
-            >Đề thi UIT</a
-          >
+          <a :class="{active: view==='flashcards'}" href="#/flashcards">Flashcards</a>
+          <a :class="{active: view==='resources'}" href="#/resources">Tài liệu</a>
+          <a :class="{active: view==='results'}" href="#/results">Bảng tổng kết</a>
+          <a :class="{active: view==='official'}" href="#/official">Đề thi UIT</a>
         </nav>
       </header>
 
@@ -38,50 +29,40 @@
         <section v-if="view==='home'">
           <h1>Ôn thi Nhập môn lập trình (C++)</h1>
           <p>
-            Mỗi ngày 1 đề (~50 câu), ôn flashcards, đánh dấu chương đã học. Tiến
-            trình được lưu bằng <code>localStorage</code>.
+            Mỗi ngày 1 đề (~50 câu), ôn flashcards, đánh dấu chương đã học. Tiến trình được lưu bằng
+            <code>localStorage</code>.
           </p>
           <div class="grid-3">
             <div class="card">
               <h3>Tiến độ chương</h3>
               <p>
-                {{ completedChaptersCount }}/{{ chapters.length }} chương đã
-                đánh dấu hoàn thành.
+                {{ completedChaptersCount }}/{{ chapters.length }} chương đã đánh dấu hoàn thành.
               </p>
               <div class="progress">
                 <div class="bar" :style="{width: chapterProgress+'%'}"></div>
               </div>
               <div class="muted">
-                Học xong lý thuyết và miniquiz ở mỗi chương rồi bấm “Đánh dấu đã
-                học”.
+                Học xong lý thuyết và miniquiz ở mỗi chương rồi bấm “Đánh dấu đã học”.
               </div>
             </div>
             <div class="card">
               <h3>Tiến độ đề ôn tập</h3>
-              <p>
-                {{ passedQuizzes }}/{{ quizzes.length }} đề đạt yêu cầu (≥ {{
-                passScore }}%).
-              </p>
+              <p>{{ passedQuizzes }}/{{ quizzes.length }} đề đạt yêu cầu (≥ {{ passScore }}%).</p>
               <div class="progress">
                 <div class="bar" :style="{width: quizProgress+'%'}"></div>
               </div>
               <div class="muted">
-                Có thể làm lại đề <em>không giới hạn</em>. Hệ thống lưu điểm cao
-                nhất.
+                Có thể làm lại đề <em>không giới hạn</em>. Hệ thống lưu điểm cao nhất.
               </div>
             </div>
             <div class="card">
               <h3>Flashcards</h3>
-              <p>
-                {{ learnedFlashcardsCount }}/{{ flashcards.length }} thẻ đã ghi
-                nhớ.
-              </p>
+              <p>{{ learnedFlashcardsCount }}/{{ flashcards.length }} thẻ đã ghi nhớ.</p>
               <div class="progress">
                 <div class="bar" :style="{width: flashProgress+'%'}"></div>
               </div>
               <div class="muted">
-                Ôn hàng ngày theo phương pháp lặp lại ngắt quãng (spaced
-                repetition).
+                Ôn hàng ngày theo phương pháp lặp lại ngắt quãng (spaced repetition).
               </div>
             </div>
           </div>
@@ -121,16 +102,9 @@
                   :key="i"
                 ><code>{{ snip }}</code></pre>
               </details>
-              <div
-                class="mini-quiz"
-                v-if="currentChapter.quiz && currentChapter.quiz.length"
-              >
+              <div class="mini-quiz" v-if="currentChapter.quiz && currentChapter.quiz.length">
                 <h4>Mini Quiz</h4>
-                <div
-                  v-for="(q, qi) in currentChapter.quiz"
-                  :key="qi"
-                  class="qcard"
-                >
+                <div v-for="(q, qi) in currentChapter.quiz" :key="qi" class="qcard">
                   <div class="qtext">{{ qi+1 }}. {{ q.text }}</div>
                   <div class="qopts" v-if="q.type==='mcq'">
                     <label v-for="(opt,oi) in q.options" :key="oi" class="opt">
@@ -153,20 +127,14 @@
                   </div>
                 </div>
                 <div class="actions">
-                  <button class="btn" @click="checkMiniQuiz">
-                    Chấm mini quiz
-                  </button>
+                  <button class="btn" @click="checkMiniQuiz">Chấm mini quiz</button>
                   <span v-if="miniScore!==null" class="score"
-                    >Điểm: {{ miniScore }}/{{ currentChapter.quiz.length
-                    }}</span
+                    >Điểm: {{ miniScore }}/{{ currentChapter.quiz.length }}</span
                   >
                 </div>
               </div>
               <div class="actions">
-                <button
-                  class="btn success"
-                  @click="markChapterDone(currentChapterIndex)"
-                >
+                <button class="btn success" @click="markChapterDone(currentChapterIndex)">
                   Đánh dấu đã học xong
                 </button>
               </div>
@@ -189,25 +157,15 @@
                 >Chủ đề:
                 <select v-model="selectedTopicKey">
                   <option disabled value="">-- chọn --</option>
-                  <option
-                    v-for="(label,key) in topicLabels"
-                    :key="key"
-                    :value="key"
-                  >
+                  <option v-for="(label,key) in topicLabels" :key="key" :value="key">
                     {{ label }}
                   </option>
                 </select>
               </label>
-              <button
-                class="btn"
-                @click="startTopicQuiz"
-                :disabled="!selectedTopicKey"
-              >
+              <button class="btn" @click="startTopicQuiz" :disabled="!selectedTopicKey">
                 Làm đề (20 câu)
               </button>
-              <span class="muted"
-                >Đề theo chủ đề không lưu vào bảng tổng kết.</span
-              >
+              <span class="muted">Đề theo chủ đề không lưu vào bảng tổng kết.</span>
             </div>
           </div>
 
@@ -216,27 +174,18 @@
               <h3>Đề {{ ti+1 }}</h3>
               <p class="muted">{{ t.description }}</p>
               <div class="quiz-meta">
-                <span
-                  >Điểm cao nhất:
-                  <strong>{{ bestScore(ti) ?? '-' }}</strong>%</span
-                >
+                <span>Điểm cao nhất: <strong>{{ bestScore(ti) ?? '-' }}</strong>%</span>
                 <span>Lần làm: <strong>{{ attempts(ti) }}</strong></span>
                 <span
                   >Trạng thái:
-                  <strong
-                    :class="{'passed': isPassed(ti), 'failed': !isPassed(ti)}"
-                  >
+                  <strong :class="{'passed': isPassed(ti), 'failed': !isPassed(ti)}">
                     {{ isPassed(ti) ? 'Đã đạt' : 'Chưa đạt' }}
                   </strong>
                 </span>
               </div>
               <div class="actions">
-                <button class="btn primary" @click="startQuiz(ti)">
-                  Làm đề
-                </button>
-                <button class="btn" @click="resetQuiz(ti)">
-                  Xóa kết quả đề này
-                </button>
+                <button class="btn primary" @click="startQuiz(ti)">Làm đề</button>
+                <button class="btn" @click="resetQuiz(ti)">Xóa kết quả đề này</button>
               </div>
             </div>
           </div>
@@ -245,21 +194,12 @@
             <hr />
             <h3 v-if="!topicMode">Đề {{ takingQuizIndex+1 }}</h3>
             <h3 v-else>Đề theo chủ đề: {{ topicLabels[selectedTopicKey] }}</h3>
-            <div
-              v-for="(q, qi) in currentQuizQuestions"
-              :key="qi"
-              class="qcard"
-            >
+            <div v-for="(q, qi) in currentQuizQuestions" :key="qi" class="qcard">
               <div class="qtext">{{ qi+1 }}. {{ q.text }}</div>
               <template v-if="q.type==='mcq'">
                 <div class="qopts">
                   <label v-for="(opt,oi) in q.options" :key="oi" class="opt">
-                    <input
-                      type="radio"
-                      :name="'q_'+qi"
-                      :value="oi"
-                      v-model="quizAnswers[qi]"
-                    />
+                    <input type="radio" :name="'q_'+qi" :value="oi" v-model="quizAnswers[qi]" />
                     {{ opt }}
                   </label>
                 </div>
@@ -310,24 +250,26 @@
                   </div>
                   <div class="correct-answer">
                     <span class="label">Đáp án đúng:</span>
-                    <span class="answer-content correct">
-                      {{ getCorrectAnswerDisplay(q) }}
-                    </span>
+                    <span class="answer-content correct"> {{ getCorrectAnswerDisplay(q) }} </span>
                   </div>
                   <div class="status">
-                    <span class="status-icon" :class="isAnswerCorrect(q, qi) ? 'correct' : 'incorrect'">
+                    <span
+                      class="status-icon"
+                      :class="isAnswerCorrect(q, qi) ? 'correct' : 'incorrect'"
+                    >
                       {{ isAnswerCorrect(q, qi) ? '✓' : '✗' }}
                     </span>
-                    <span class="status-text" :class="isAnswerCorrect(q, qi) ? 'correct' : 'incorrect'">
+                    <span
+                      class="status-text"
+                      :class="isAnswerCorrect(q, qi) ? 'correct' : 'incorrect'"
+                    >
                       {{ isAnswerCorrect(q, qi) ? 'Đúng' : 'Sai' }}
                     </span>
                   </div>
                 </div>
               </div>
               <div class="actions">
-                <button class="btn success" @click="redoQuiz">
-                  Làm lại đề (xáo trộn)
-                </button>
+                <button class="btn success" @click="redoQuiz">Làm lại đề (xáo trộn)</button>
               </div>
             </div>
           </div>
@@ -337,29 +279,16 @@
         <section v-if="view==='flashcards'">
           <h2>Flashcards</h2>
           <div class="flash-controls">
-            <label
-              ><input type="checkbox" v-model="hideLearned" /> Ẩn thẻ đã
-              nhớ</label
-            >
+            <label><input type="checkbox" v-model="hideLearned" /> Ẩn thẻ đã nhớ</label>
             <button class="btn" @click="resetFlashcards">Reset đã nhớ</button>
           </div>
           <div class="flashcard" v-if="filteredFlashcards.length">
-            <div
-              class="flashcard-inner"
-              :class="{flipped: showAnswer}"
-              @click="toggleFlash"
-            >
+            <div class="flashcard-inner" :class="{flipped: showAnswer}" @click="toggleFlash">
               <div class="face front">
                 <div class="topic">{{ currentFlash.topic }}</div>
-                <div class="q">
-                  {{ currentFlash.text || currentFlash.question }}
-                </div>
+                <div class="q">{{ currentFlash.text || currentFlash.question }}</div>
                 <div v-if="currentFlash.options" class="options">
-                  <div
-                    v-for="(option, i) in currentFlash.options"
-                    :key="i"
-                    class="option"
-                  >
+                  <div v-for="(option, i) in currentFlash.options" :key="i" class="option">
                     {{ String.fromCharCode(65 + i) }}. {{ option }}
                   </div>
                 </div>
@@ -367,9 +296,7 @@
               </div>
               <div class="face back">
                 <div class="topic">{{ currentFlash.topic }}</div>
-                <div class="q">
-                  {{ currentFlash.text || currentFlash.question }}
-                </div>
+                <div class="q">{{ currentFlash.text || currentFlash.question }}</div>
                 <div v-if="currentFlash.options" class="options">
                   <div
                     v-for="(option, i) in currentFlash.options"
@@ -384,18 +311,13 @@
             </div>
             <div class="actions spaced">
               <button class="btn" @click="prevFlash">&larr; Trước</button>
-              <button class="btn success" @click="markFlashLearned">
-                Đã nhớ
-              </button>
+              <button class="btn success" @click="markFlashLearned">Đã nhớ</button>
               <button class="btn" @click="nextFlash">Sau &rarr;</button>
             </div>
-            <div class="muted center">
-              {{ flashIndex+1 }}/{{ filteredFlashcards.length }}
-            </div>
+            <div class="muted center">{{ flashIndex+1 }}/{{ filteredFlashcards.length }}</div>
           </div>
           <p v-else class="muted">
-            Không còn thẻ để ôn (đã ẩn thẻ đã nhớ). Hãy bỏ chọn "Ẩn thẻ đã nhớ"
-            hoặc reset.
+            Không còn thẻ để ôn (đã ẩn thẻ đã nhớ). Hãy bỏ chọn "Ẩn thẻ đã nhớ" hoặc reset.
           </p>
         </section>
 
@@ -403,9 +325,8 @@
         <section v-if="view==='resources'">
           <h2>Tài liệu ôn tập</h2>
           <p>
-            Đặt link tài liệu (slide, đề cương, đề mẫu, đáp án...) tại đây. (Tạm
-            thời là mẫu; bạn có thể chỉnh trong <code>app.js</code> &rarr;
-            <code>resources</code>.)
+            Đặt link tài liệu (slide, đề cương, đề mẫu, đáp án...) tại đây. (Tạm thời là mẫu; bạn có
+            thể chỉnh trong <code>app.js</code> &rarr; <code>resources</code>.)
           </p>
           <ul class="res">
             <li v-for="(r,ri) in resources" :key="ri">
@@ -429,9 +350,7 @@
                   >
                 </li>
               </ul>
-              <button class="btn" @click="clearChapters">
-                Xóa đánh dấu chương
-              </button>
+              <button class="btn" @click="clearChapters">Xóa đánh dấu chương</button>
             </div>
             <div class="card">
               <h3>Đề ôn tập</h3>
@@ -450,8 +369,7 @@
                     <td>{{ bestScore(ti) ?? '-' }}%</td>
                     <td>{{ attempts(ti) }}</td>
                     <td>
-                      <strong
-                        :class="{'passed': isPassed(ti), 'failed': !isPassed(ti)}"
+                      <strong :class="{'passed': isPassed(ti), 'failed': !isPassed(ti)}"
                         >{{ isPassed(ti) ? 'Đã đạt' : 'Chưa đạt' }}</strong
                       >
                     </td>
@@ -459,18 +377,14 @@
                 </tbody>
               </table>
               <div class="actions">
-                <button class="btn" @click="clearQuizResults">
-                  Xóa tất cả kết quả
-                </button>
+                <button class="btn" @click="clearQuizResults">Xóa tất cả kết quả</button>
               </div>
             </div>
           </div>
           <div class="card">
             <h3>Tiến trình & Sao lưu</h3>
             <div class="actions">
-              <button class="btn" @click="exportProgress">
-                Xuất tiến trình (.json)
-              </button>
+              <button class="btn" @click="exportProgress">Xuất tiến trình (.json)</button>
               <label class="btn">
                 Nhập tiến trình
                 <input
@@ -480,13 +394,10 @@
                   @change="importProgress"
                 />
               </label>
-              <button class="btn danger" @click="fullReset">
-                Reset toàn bộ
-              </button>
+              <button class="btn danger" @click="fullReset">Reset toàn bộ</button>
             </div>
             <p class="muted">
-              Tiến trình được lưu cục bộ bằng <code>localStorage</code> trên
-              thiết bị của bạn.
+              Tiến trình được lưu cục bộ bằng <code>localStorage</code> trên thiết bị của bạn.
             </p>
           </div>
         </section>
@@ -497,16 +408,14 @@
           <div class="card">
             <h3>Tạo đề thi theo format chính thức UIT</h3>
             <p class="muted">
-              Sinh đề thi tự luận theo cấu trúc đề thi cuối kỳ của Trường ĐH
-              Công nghệ Thông tin với các bài toán lập trình hoàn chỉnh.
+              Sinh đề thi tự luận theo cấu trúc đề thi cuối kỳ của Trường ĐH Công nghệ Thông tin với
+              các bài toán lập trình hoàn chỉnh.
             </p>
             <div class="actions">
               <button class="btn primary" @click="generateUitExam">
                 Sinh đề thi UIT (PDF-ready)
               </button>
-              <button class="btn" @click="printUitExam" v-if="uitExam">
-                In/Xuất PDF
-              </button>
+              <button class="btn" @click="printUitExam" v-if="uitExam">In/Xuất PDF</button>
             </div>
           </div>
 
@@ -526,12 +435,8 @@
                 <strong>CAN BỘ COI THI</strong><br />
                 <table style="border: 1px solid #666; width: 100%">
                   <tr>
-                    <td style="padding: 8px; border: 1px solid #666">
-                      HỌ VÀ TÊN SV:
-                    </td>
-                    <td
-                      style="padding: 8px; border: 1px solid #666; width: 60%"
-                    ></td>
+                    <td style="padding: 8px; border: 1px solid #666">HỌ VÀ TÊN SV:</td>
+                    <td style="padding: 8px; border: 1px solid #666; width: 60%"></td>
                   </tr>
                   <tr>
                     <td style="padding: 8px; border: 1px solid #666">MSSV:</td>
@@ -542,9 +447,7 @@
                     <td style="padding: 8px; border: 1px solid #666"></td>
                   </tr>
                   <tr>
-                    <td style="padding: 8px; border: 1px solid #666">
-                      SỐ BÁO DANH:
-                    </td>
+                    <td style="padding: 8px; border: 1px solid #666">SỐ BÁO DANH:</td>
                     <td style="padding: 8px; border: 1px solid #666"></td>
                   </tr>
                 </table>
@@ -576,7 +479,10 @@
                     <p><strong>Câu {{ qi + 1 }}:</strong> {{ question.question }}</p>
                     <div class="answer-space">
                       <p>Trả lời:</p>
-                      <div class="answer-lines" style="min-height: 100px; border: 1px solid #ccc; margin: 10px 0;"></div>
+                      <div
+                        class="answer-lines"
+                        style="min-height: 100px; border: 1px solid #ccc; margin: 10px 0"
+                      ></div>
                     </div>
                     <p class="points">({{ question.points }} điểm)</p>
                   </div>
@@ -584,10 +490,14 @@
 
                 <!-- Lập trình -->
                 <div v-if="section.type === 'programming'">
-                  <div v-for="(problem, pi) in section.questions" :key="pi" class="programming-problem">
+                  <div
+                    v-for="(problem, pi) in section.questions"
+                    :key="pi"
+                    class="programming-problem"
+                  >
                     <h4>Bài {{ pi + 1 }}:</h4>
                     <p>{{ problem.description }}</p>
-                    
+
                     <div v-if="problem.sampleInput" class="sample">
                       <p><strong>Ví dụ:</strong></p>
                       <p><strong>Input:</strong> {{ problem.sampleInput }}</p>
@@ -597,13 +507,19 @@
 
                     <div class="algorithm-section">
                       <p><strong>Thuật toán:</strong></p>
-                      <div class="algorithm-space" style="min-height: 150px; border: 1px solid #ccc; margin: 10px 0;"></div>
+                      <div
+                        class="algorithm-space"
+                        style="min-height: 150px; border: 1px solid #ccc; margin: 10px 0"
+                      ></div>
                       <p class="points">({{ problem.algorithmPoints }} điểm)</p>
                     </div>
 
                     <div class="code-section">
                       <p><strong>Code:</strong></p>
-                      <div class="code-space" style="min-height: 200px; border: 1px solid #ccc; margin: 10px 0;"></div>
+                      <div
+                        class="code-space"
+                        style="min-height: 200px; border: 1px solid #ccc; margin: 10px 0"
+                      ></div>
                       <p class="points">({{ problem.codePoints }} điểm)</p>
                     </div>
                   </div>

@@ -150,7 +150,7 @@ const app = Vue.createApp({
       learnedFlashcards: new Set(state.learnedFlashcards || []),
 
       // Trạng thái giao diện
-      currentChapterIndex: null,
+      currentChapterIndex: 0, // Mặc định chọn chương 1
       currentMiniQuiz: [],
       miniAnswers: {},
       miniScore: null,
@@ -558,6 +558,11 @@ const app = Vue.createApp({
   mounted() {
     window.addEventListener('hashchange', this.applyRoute)
     this.applyRoute()
+
+    // Khởi tạo chương 1 mặc định
+    if (this.currentChapterIndex === 0) {
+      this.openChapter(0)
+    }
   },
 })
 

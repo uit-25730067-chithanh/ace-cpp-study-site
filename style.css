@@ -21,6 +21,10 @@ a {
   color: var(--accent);
   text-decoration: none;
 }
+input[type='radio' i] {
+  width: 18px;
+  height: 18px;
+}
 .topbar {
   position: sticky;
   top: 0;
@@ -61,6 +65,9 @@ a {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
 @media (max-width: 900px) {
   .grid-3,
@@ -126,6 +133,7 @@ a {
 .muted {
   color: var(--muted);
   font-size: 14px;
+  margin-bottom: 8px;
 }
 .center {
   text-align: center;
@@ -148,8 +156,8 @@ a {
   flex-direction: column;
   gap: 8px;
   position: sticky;
-  top: 80px;
-  max-height: calc(100vh - 100px);
+  top: 64px;
+  max-height: calc(100vh - 172px);
   overflow-y: auto;
   padding-right: 8px;
 }
@@ -190,6 +198,9 @@ a {
 .qopts .opt {
   display: block;
   margin: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .short {
   width: 100%;

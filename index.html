@@ -291,19 +291,38 @@
             <div v-if="quizScore!==null" class="result">
               <h4>Kết quả: {{ quizScore }}%</h4>
               <p class="muted">
-                Đáp án đúng sẽ hiển thị bên dưới. Bạn có thể làm lại đề để cải
+                Đáp án của bạn và đáp án đúng sẽ hiển thị bên dưới. Bạn có thể làm lại đề để cải
                 thiện điểm.
               </p>
               <div
                 v-for="(q, qi) in currentQuizQuestions"
                 :key="'a'+qi"
                 class="ans"
+                :class="getAnswerClass(q, qi)"
               >
                 <div class="qtext">Câu {{ qi+1 }}: {{ q.text }}</div>
-                <div v-if="q.type==='mcq'">
-                  Đáp án đúng: <strong>{{ q.options[q.answer] }}</strong>
+                <div class="answer-comparison">
+                  <div class="user-answer">
+                    <span class="label">Đáp án của bạn:</span>
+                    <span class="answer-content" :class="getUserAnswerClass(q, qi)">
+                      {{ getUserAnswerDisplay(q, qi) }}
+                    </span>
+                  </div>
+                  <div class="correct-answer">
+                    <span class="label">Đáp án đúng:</span>
+                    <span class="answer-content correct">
+                      {{ getCorrectAnswerDisplay(q) }}
+                    </span>
+                  </div>
+                  <div class="status">
+                    <span class="status-icon" :class="isAnswerCorrect(q, qi) ? 'correct' : 'incorrect'">
+                      {{ isAnswerCorrect(q, qi) ? '✓' : '✗' }}
+                    </span>
+                    <span class="status-text" :class="isAnswerCorrect(q, qi) ? 'correct' : 'incorrect'">
+                      {{ isAnswerCorrect(q, qi) ? 'Đúng' : 'Sai' }}
+                    </span>
+                  </div>
                 </div>
-                <div v-else>Đáp án đúng: <code>{{ q.answer }}</code></div>
               </div>
               <div class="actions">
                 <button class="btn success" @click="redoQuiz">

@@ -3656,6 +3656,40 @@ const app = window.Vue.createApp({
       else if (this.takingQuizIndex !== null)
         this.startQuiz(this.takingQuizIndex, true);
     },
+    // Helper methods for quiz result display
+    isAnswerCorrect(q, qi) {
+      if (q.type === "mcq") {
+        return Number(this.quizAnswers[qi]) === q.answer;
+      } else if (q.type === "short" || q.type === "code-out") {
+        const ans = String(this.quizAnswers[qi] || "").trim();
+        return ans.toLowerCase() === String(q.answer).toLowerCase();
+      }
+      return false;
+    },
+    getUserAnswerDisplay(q, qi) {
+      const userAnswer = this.quizAnswers[qi];
+      if (q.type === "mcq") {
+        if (userAnswer === undefined || userAnswer === null || userAnswer === "") {
+          return "Không chọn";
+        }
+        return q.options[userAnswer] || "Lựa chọn không hợp lệ";
+      } else {
+        return userAnswer || "Không trả lời";
+      }
+    },
+    getCorrectAnswerDisplay(q) {
+      if (q.type === "mcq") {
+        return q.options[q.answer];
+      } else {
+        return q.answer;
+      }
+    },
+    getUserAnswerClass(q, qi) {
+      return this.isAnswerCorrect(q, qi) ? "correct" : "incorrect";
+    },
+    getAnswerClass(q, qi) {
+      return this.isAnswerCorrect(q, qi) ? "answer-correct" : "answer-incorrect";
+    },
     cancelQuiz() {
       this.takingQuizIndex = null;
       this.currentQuizQuestions = [];

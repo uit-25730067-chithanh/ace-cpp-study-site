@@ -7,7 +7,10 @@
     <link rel="icon" href="data:," />
     <script src="https://unpkg.com/vue@3.4.38/dist/vue.global.prod.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <script src="./data.js"></script>
+
+    <script src="./chapters-data.js"></script>
+    <script src="./flashcards-data.js"></script>
+    <script src="./quizzes-data.js"></script>
   </head>
   <body>
     <div id="app">
@@ -29,7 +32,7 @@
         <section v-if="view==='home'">
           <h1>Ôn thi Nhập môn lập trình (C++)</h1>
           <p>
-            Mỗi ngày 1 đề (~50 câu), ôn flashcards, đánh dấu chương đã học. Tiến trình được lưu bằng
+            Mỗi ngày 1 đề (20 câu), ôn flashcards, đánh dấu chương đã học. Tiến trình được lưu bằng
             <code>localStorage</code>.
           </p>
           <div class="grid-3">
@@ -147,27 +150,7 @@
 
         <!-- QUIZZES -->
         <section v-if="view==='quizzes'">
-          <h2>Đề ôn tập (10 đề • 50 câu/đề)</h2>
-
-          <!-- Luyện theo chủ đề: thêm, KHÔNG ảnh hưởng 10 đề mẫu -->
-          <div class="card">
-            <h3>Luyện theo chủ đề</h3>
-            <div class="actions">
-              <label
-                >Chủ đề:
-                <select v-model="selectedTopicKey">
-                  <option disabled value="">-- chọn --</option>
-                  <option v-for="(label,key) in topicLabels" :key="key" :value="key">
-                    {{ label }}
-                  </option>
-                </select>
-              </label>
-              <button class="btn" @click="startTopicQuiz" :disabled="!selectedTopicKey">
-                Làm đề (20 câu)
-              </button>
-              <span class="muted">Đề theo chủ đề không lưu vào bảng tổng kết.</span>
-            </div>
-          </div>
+          <h2>Đề ôn tập (20 đề • 20 câu/đề)</h2>
 
           <div class="quiz-list">
             <div v-for="(t, ti) in quizzes" :key="ti" class="card quiz-item">
@@ -542,23 +525,6 @@
       </footer>
     </div>
 
-    <!-- <script>
-      const PASS_SCORE = 80;
-      const STORAGE_KEY = "ace_cpp_progress_v1";
-      const TOPIC_LABELS = {
-        basics: "Cơ bản & Cú pháp",
-        control: "Rẽ nhánh & Vòng lặp",
-        array1d: "Mảng 1 chiều",
-        array2d: "Mảng 2 chiều",
-        strings: "Chuỗi C-style",
-        pointers: "Con trỏ",
-        functions: "Hàm & tham chiếu",
-        recursion: "Đệ quy",
-        structs: "Struct",
-      };
-
-      // Include all data and logic from app.js here (will be done in next steps)
-    </script> -->
     <script src="./app.js"></script>
   </body>
 </html>
